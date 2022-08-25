@@ -19,7 +19,8 @@ userRoutes.get("/v1/",authMiddleware,fetchUsersCtrl);
 userRoutes.delete("/v1/:id",deleteUserCtrl);
 userRoutes.get("/v1/:id",fetchUserDetailsCtrl);
 userRoutes.get("/v1/profile/:id",authMiddleware,userProfileCtrl);
+userRoutes.put("/v1/password",authMiddleware,updateUserPasswordCtrl);
 userRoutes.put("/v1/:id",authMiddleware,updateUserCtrl);
-userRoutes.put("v1/password/:id",authMiddleware,updateUserPasswordCtrl);
+
 
 module.exports = userRoutes;

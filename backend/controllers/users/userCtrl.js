@@ -72,8 +72,8 @@ const deleteUserCtrl = expressAsyncHandler(async (req, res) => {
 
 //Fetch single user
 const fetchUserDetailsCtrl = expressAsyncHandler(async (req, res) => {
-  const {id} = req.params;
-//check if user id is valid
+  const { id } = req.params;
+  //check if user id is valid
   validateMongodbId(id);
   try {
     const user = await User.findById(id);
@@ -84,51 +84,53 @@ const fetchUserDetailsCtrl = expressAsyncHandler(async (req, res) => {
 })
 
 //FETCH USER PROFILE
-const userProfileCtrl = expressAsyncHandler(async(req,res)=>{
-  const {id} = req.params
+const userProfileCtrl = expressAsyncHandler(async (req, res) => {
+  const { id } = req.params
   validateMongodbId(id)
-  try{
-const myProfile = await User.findById(id)
-res.json(myProfile);
-  }catch{
+  try {
+    const myProfile = await User.findById(id)
+    res.json(myProfile);
+  } catch {
     res.json(error)
   }
 })
 
 //UPDATE USER PROFILE
-const updateUserCtrl = expressAsyncHandler(async(req,res)=>{
-  const {_id} = req?.user
+const updateUserCtrl = expressAsyncHandler(async (req, res) => {
+  const { _id } = req?.user
+
   validateMongodbId(_id)
-  const user = await User.findByIdAndUpdate(_id,{
+  const user = await User.findByIdAndUpdate(_id, {
     firstName: req?.body?.firstName,
     lastName: req?.body?.lastName,
     email: req?.body?.email,
     bio: req?.body?.bio
-  },{
-new:true,
-runValidators:true,
+  }, {
+    new: true,
+    runValidators: true,
   })
   res.json(user)
-})  
+})
 
 //UPDATE PASSWORD
-const updateUserPasswordCtrl = expressAsyncHandler(async(req,res)=>{
+const updateUserPasswordCtrl = expressAsyncHandler(async (req, res) => {
   //destructure the login user
-  const {_id} = req.user;
-  const {password} = req.body;
+  const { _id } = req.user;
+  const { password } = req.body;
   validateMongodbId(_id);
   //find the user  by _id
   const user = await User.findById(_id);
 
-  if(password){
-user.password = password;
-const updatedUser = await user.save();
-res.json(updatedUser);
+  if (password) {
+    user.password = password;
+    const updatedUser = await user.save();
+        res.json(updatedUser);
+  } else {
+    res.json(user)
   }
-  res.json(user)
 })
 
-  module.exports = {
+module.exports = {
   userRegisterCtrl,
   loginUserCtrl,
   fetchUsersCtrl,
