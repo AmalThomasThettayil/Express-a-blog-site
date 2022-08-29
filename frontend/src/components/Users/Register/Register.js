@@ -41,10 +41,10 @@ const Register = () => {
   //select state from store
   const storeData = useSelector(store => store?.users);
   const { loading, appErr, serverErr, registered } = storeData;
-
+console.log(registered);
   //redirect
   if (registered) {
-    return <Redirect to="/profile" />;
+    return <Redirect to="/login" />;
   }
 
   return (
