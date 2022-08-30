@@ -10,7 +10,7 @@ export const registerUserAction = createAsyncThunk(
     async (user, { rejectWithValue, getState, dispatch }) => {
         const config = {
             headers: {
-                "Content-type": "application/json"
+                "Content-Type": "application/json"
             }
         }
         try {
@@ -23,7 +23,7 @@ export const registerUserAction = createAsyncThunk(
             )
             return data;
         } catch (error) {
-            if (!error && !error.res) {
+            if (!error?.response) {
                 throw error;
             }
             return rejectWithValue(error?.response?.data);
@@ -59,15 +59,14 @@ export const loginUserAction = createAsyncThunk(
 )
 
 //get user from local storage and place into store
-const userLoginFromStorage = localStorage.getItem("userInfo")
-  ? JSON.parse(localStorage.getItem("userInfo"))
-  : null;
+const userLoginFromStorage = localStorage.getItem("userInfo")? JSON.parse(localStorage.getItem("userInfo"))
+: null;
 
 //slices
 const userSlices = createSlice({
     name: "users",
     initialState: {
-        userAuth: userLoginFromStorage,
+        userAuth:userLoginFromStorage,
     },
     extraReducers: builders => {
         //register

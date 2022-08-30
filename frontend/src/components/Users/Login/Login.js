@@ -30,9 +30,11 @@ const Login = () => {
         validationSchema: formSchema,
     });
     //redirect
-    const store = useSelector(state => state?.users?.userAuth)
+    const store = useSelector(state => state?.users)
+    //const store = useSelector(state => state?.users)
     console.log(store);
     const { userAuth, loading, serverErr, appErr } = store;
+    console.log(userAuth);
     if (userAuth) return <Redirect to="/profile" />
 
     return (

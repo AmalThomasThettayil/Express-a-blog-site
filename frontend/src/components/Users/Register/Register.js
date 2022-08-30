@@ -9,10 +9,10 @@ import { registerUserAction } from "../../../redux/slices/users/userSlices";
 
 //Form schema
 const formSchema = Yup.object({
-  firstName: Yup.string().required("First Name is required"),
-  lastName: Yup.string().required("Last Name is required"),
-  email: Yup.string().required("Email is required"),
-  password: Yup.string().required("Password is required"),
+  firstName: Yup.string().required("First Name is required!"),
+  lastName: Yup.string().required("Last Name is required!"),
+  email: Yup.string().required("Email is required!"),
+  password: Yup.string().required("Password is required!"),
 });
 //-------------------------------
 //Register
@@ -44,7 +44,7 @@ const Register = () => {
 console.log(registered);
   //redirect
   if (registered) {
-    return <Redirect to="/login" />;
+    return <Redirect to="/profile"/>;
   }
 
   return (
