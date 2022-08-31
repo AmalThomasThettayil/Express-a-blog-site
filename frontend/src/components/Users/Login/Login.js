@@ -4,7 +4,6 @@ import { useFormik } from "formik"
 import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from "yup";
-import poster from "../../../img/poster.png"
 import { loginUserAction } from '../../../redux/slices/users/userSlices';
 
 
@@ -39,27 +38,22 @@ const Login = () => {
 
     return (
         <>
-            <section className="min-h-screen relative py-20 2xl:py-40 bg-gray-900 overflow-hidden">
-                <div className="absolute top-0 left-0 lg:bottom-0 h-full lg:h-auto w-full lg:w-4/12 bg-violet-500 lg:overflow-hidden">
-                    <img
-                        className="hidden lg:block h-full w-full object-cover"
-                        src={poster}
-                        alt=""
-                    />
+            <section className="min-h-screen relative py-20 2xl:py-40 bg-black overflow-hidden">
+                <div className="absolute top-0 left-0 lg:bottom-0 h-full lg:h-auto w-full lg:w-4/12 bg-black lg:overflow-hidden">
                 </div>
                 <div className="relative container px-4 mx-auto">
                     <div className="max-w-5xl mx-auto">
                         <div className="flex flex-wrap items-center -mx-4">
                             <div className="w-full lg:w-2/5 px-4">
-                                <div className="px-6 lg:px-12 py-12 lg:py-24 bg-white shadow-lg rounded-lg">
+                                <div className="px-6 lg:px-12 py-12 lg:py-24 bg-gray-300 shadow-lg rounded-lg">
                                     {/* Form */}
                                     <form onSubmit={formik.handleSubmit}>
                                         <h3 className="mb-10 text-2xl font-bold font-heading">
                                             {/* Header */}
                                             Login to your Account
                                         </h3>
-                                         {/* display error */}
-                                        {serverErr||appErr? <h2 className="text-red-500">{serverErr}-{appErr}</h2>:null}
+                                        {/* display error */}
+                                        {serverErr || appErr ? <h2 className="text-red-500">{serverErr}-{appErr}</h2> : null}
                                         <div className="flex items-center pl-6 mb-3 border border-gray-50 bg-white rounded-full">
                                             <span className="inline-block pr-3 border-r border-gray-50">
                                                 <svg
@@ -140,7 +134,7 @@ const Login = () => {
                                         ) : (
                                             <button
                                                 type="submit"
-                                                className="py-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full transition duration-200"
+                                                className="py-4 w-full bg-yellow-500 hover:bg-black hover:text-white text-white font-bold rounded-full transition duration-200"
                                             >
                                                 Login
                                             </button>
@@ -149,7 +143,7 @@ const Login = () => {
                                 </div>
                             </div>
                             <div className="w-full lg:w-3/5 px-4 mb-16 lg:mb-0 order-first lg:order-last">
-                                <span className="flex mb-10 mx-auto items-center justify-center h-20 w-20 bg-blue-500 rounded-lg">
+                                <span className="flex mb-10 mx-auto items-center justify-center h-20 w-20 bg-yellow-500 rounded-lg">
                                     <svg
                                         width="37"
                                         height="37"
@@ -189,8 +183,8 @@ const Login = () => {
                                         </g>
                                     </svg>
                                 </span>
-                                <h2 className="mb-10 text-center text-6xl lg:text-7xl text-gray-300 font-bold font-heading">
-                                    Ready to start? Login Now.
+                                <h2 className="mb-10 text-center text-6xl lg:text-7xl text-white font-bold font-heading">
+                                    Welcome back! Login Now.
                                 </h2>
                             </div>
                         </div>

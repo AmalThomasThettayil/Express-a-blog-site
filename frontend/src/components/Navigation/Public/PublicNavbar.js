@@ -129,8 +129,10 @@ const PublicNavbar = () => {
               ))}
             </div>
           </Disclosure.Panel>
+        <hr style={{borderColor:"black"}}/>
         </>
       )}
+      
     </Disclosure>
   );
 };

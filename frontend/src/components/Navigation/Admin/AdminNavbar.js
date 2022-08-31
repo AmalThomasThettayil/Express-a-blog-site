@@ -225,6 +225,7 @@ const AdminNavbar = () => {
               </div>
             </div>
           </Disclosure.Panel>
+          <hr style={{borderColor:"black"}}/>
         </>
       )}
     </Disclosure>
