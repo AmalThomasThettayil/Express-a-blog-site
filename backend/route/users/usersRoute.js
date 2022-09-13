@@ -12,6 +12,7 @@ const {
     unfollowUserCtrl,
     blockUserCtrl,
     unblockUserCtrl,
+    generateVerificationTokenCtrl,
 } = require("../../controllers/users/userCtrl");
 const authMiddleware = require('../../middlewares/auth/authMiddleware');
 
@@ -25,6 +26,7 @@ userRoutes.get("/v1/:id", fetchUserDetailsCtrl);
 userRoutes.get("/v1/profile/:id", authMiddleware, userProfileCtrl);
 userRoutes.put("/v1/password", authMiddleware, updateUserPasswordCtrl);
 userRoutes.put("/v1/follow", authMiddleware, followingUserCtrl);
+userRoutes.post("/v1/generate-verify-email-token", authMiddleware, generateVerificationTokenCtrl);
 userRoutes.put("/v1/unfollow", authMiddleware, unfollowUserCtrl);
 userRoutes.put("/v1/block-user/:id", authMiddleware, blockUserCtrl);
 userRoutes.put("/v1/unblock-user/:id", authMiddleware, unblockUserCtrl);
