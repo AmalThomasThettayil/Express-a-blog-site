@@ -228,18 +228,26 @@ const generateVerificationTokenCtrl = expressAsyncHandler(async (req, res) => {
   try {
     //Generate token
     const verificationToken = await user.createAccountVerificationToken();
+    //save the user
+    await user.save()
     console.log(verificationToken)
+
     //build your message
+
+    const resetURL = `Verify account within 10 minutes 
+    <a href="http://localhost:3000/verify-account/${verificationToken}">
+    Click to verify
+    </a>`
     const msg = {
       to: 'amal.thms@gmail.com', // Change to your recipient
       from: 'amal.thms@gmail.com', // Change to your verified sender
       subject: 'Sending with SendGrid is Fun',
-      text: 'and easy to do anywhere, even with Node.js',
+      html: resetURL,
     }
-    //await sgMail.send(msg);
-    res.json("Email sent")
+    await sgMail.send(msg);
+    res.json(resetURL)
   } catch (error) {
-
+    res.json(error)
   }
 }
 )

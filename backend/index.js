@@ -37,5 +37,3 @@ app.listen(PORT, console.log(`server is running on port: ${PORT}`))
 
 //NW5I0Tq1DUCv898K
 
-//send grid
-//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
