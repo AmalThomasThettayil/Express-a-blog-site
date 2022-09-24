@@ -217,7 +217,7 @@ const unblockUserCtrl = expressAsyncHandler(async (req, res) => {
 })
 
 //-----------------------------------------
-//ACCOUNT VERIFICATION- SEND EMAIL
+//GENERATE EMAIL VERIFIACATION TOKEN
 //-----------------------------------------
 
 const generateVerificationTokenCtrl = expressAsyncHandler(async (req, res) => {
@@ -251,6 +251,10 @@ const generateVerificationTokenCtrl = expressAsyncHandler(async (req, res) => {
   }
 }
 )
+//------------------------------------
+//ACCOUNT VERIFICATION
+//------------------------------
+
 
 module.exports = {
   userRegisterCtrl,
