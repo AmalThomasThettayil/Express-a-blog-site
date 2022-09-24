@@ -18,6 +18,16 @@ wrong email address error
 13-9-22
 39 user activation part 1
 15-9-22
+send grid account suspended, waiting for reactivATIOn
+24-9-22
+password reset to be done after send grid acc reactivation
+44 file upload cloudinary, multer, node js, resize
+multer: to receive images
+sharp: to resize images
+image upload successful
+46 image to cloudinary
+
+
 
 
 

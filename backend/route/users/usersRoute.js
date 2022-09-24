@@ -13,13 +13,24 @@ const {
     blockUserCtrl,
     unblockUserCtrl,
     generateVerificationTokenCtrl,
+    profilePhotoUploadCtrl,
 } = require("../../controllers/users/userCtrl");
 const authMiddleware = require('../../middlewares/auth/authMiddleware');
+const { profilePhotoUpload,
+    profilePhotoResize,
+} = require('../../middlewares/upload/profilePhotoUpload');
 
 const userRoutes = express.Router();
 
 userRoutes.post("/v1/register", userRegisterCtrl);
 userRoutes.post("/v1/login", loginUserCtrl);
+userRoutes.put("/v1/profilePhoto-upload",
+    authMiddleware,
+    profilePhotoUpload.single("image"),
+    profilePhotoResize,
+    profilePhotoUploadCtrl,
+);
+
 userRoutes.get("/v1/", authMiddleware, fetchUsersCtrl);
 userRoutes.delete("/v1/:id", deleteUserCtrl);
 userRoutes.get("/v1/:id", fetchUserDetailsCtrl);

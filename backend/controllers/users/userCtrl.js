@@ -251,9 +251,18 @@ const generateVerificationTokenCtrl = expressAsyncHandler(async (req, res) => {
   }
 }
 )
-//------------------------------------
+//------------------------------
 //ACCOUNT VERIFICATION
 //------------------------------
+
+//----------------------------------------
+//PROFILE PHOTO UPLOAD
+//-----------------------------------------
+
+const profilePhotoUploadCtrl = expressAsyncHandler(async (req, res) => {
+  res.json("upload")
+  console.log(req.file)
+})
 
 
 module.exports = {
@@ -270,4 +279,5 @@ module.exports = {
   blockUserCtrl,
   unblockUserCtrl,
   generateVerificationTokenCtrl,
+  profilePhotoUploadCtrl,
 };
