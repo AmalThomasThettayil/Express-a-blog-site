@@ -1,10 +1,12 @@
 const expressAsyncHandler = require("express-async-handler");
 const sgMail = require("@sendgrid/mail");
+const crypto = require("crypto")
 const generateToken = require("../../config/token/generateToken");
 const User = require("../../model/user/User");
 const validateMongodbId = require("../../utils/validateMongodbID");
-
+const cloudinaryUploadImg = require("../../utils/cloudinary");
 sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
+
 //USER REGISTER
 const userRegisterCtrl = expressAsyncHandler(async (req, res) => {
   //checkif user Exist
@@ -254,14 +256,40 @@ const generateVerificationTokenCtrl = expressAsyncHandler(async (req, res) => {
 //------------------------------
 //ACCOUNT VERIFICATION
 //------------------------------
+const accountVerificationCtrl = expressAsyncHandler(async (req, res) => {
+  const { token } = req.body
+  const hashedToken = crypto.createHash('sha256').update("2623e8defc05eec0a031ef69ba91a8e307a88934fff15ed6e0bae943ef61b10a").digest('hex')
+  //finsd this user by token
+  const userFound = await User.findOne({
+    accountVerficationToken: hashedToken,
+    accountVerficationTokenExpires: { $gt: new Date() },
+  })
+  if (!userFound) throw new Error("Token expired, try again later")
+  //update the property to true
+  userFound.isAccountVerified = true;
+  userFound.accountVerficationToken = undefined
+  userFound.accountVerficationTokenExpires = undefined
+  await userFound.save();
+  res.json(userFound)
+
+  console.log(hashedToken)
+})
+
 
 //----------------------------------------
 //PROFILE PHOTO UPLOAD
 //-----------------------------------------
 
 const profilePhotoUploadCtrl = expressAsyncHandler(async (req, res) => {
-  res.json("upload")
-  console.log(req.file)
+  //Find the login user
+  console.log(req.user)
+  //1. Get the path to img
+  const localPath = `public/images/profile/${req.file.filename} `
+  //2. Upload to cloudinary
+  const imgUploaded = await cloudinaryUploadImg(localPath);
+  console.log(imgUploaded)
+  res.json(localPath);
+
 })
 
 
@@ -279,5 +307,6 @@ module.exports = {
   blockUserCtrl,
   unblockUserCtrl,
   generateVerificationTokenCtrl,
+  accountVerificationCtrl,
   profilePhotoUploadCtrl,
 };

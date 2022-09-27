@@ -25,7 +25,11 @@ password reset to be done after send grid acc reactivation
 multer: to receive images
 sharp: to resize images
 image upload successful
-46 image to cloudinary
+46 image to cloudinary: 
+26-9-2022
+error in upload to cloudinary:path not found
+41 forgot password utility
+
 
 
 

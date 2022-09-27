@@ -107,7 +107,7 @@ userSchema.pre("save", async function (next) {
 
 //match password
 userSchema.methods.isPasswordMatched = async function (enteredPassword) {
-    return await bcrypt.compare(enteredPassword, this.password)
+    return bcrypt.compare(enteredPassword, this.password)
 }
 
 //verify account
