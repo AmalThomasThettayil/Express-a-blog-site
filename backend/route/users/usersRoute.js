@@ -14,7 +14,9 @@ const {
     unblockUserCtrl,
     generateVerificationTokenCtrl,
     profilePhotoUploadCtrl,
+    forgetPasswordToken,
     accountVerificationCtrl,
+    passwordResetCtrl,
 } = require("../../controllers/users/userCtrl");
 const authMiddleware = require('../../middlewares/auth/authMiddleware');
 const { profilePhotoUpload,
@@ -31,6 +33,12 @@ userRoutes.put("/v1/profilePhoto-upload",
     profilePhotoResize,
     profilePhotoUploadCtrl,
 );
+
+userRoutes.post("/v1/forget-password-token",
+    forgetPasswordToken);
+userRoutes.put("/v1/reset-password", passwordResetCtrl);
+
+
 userRoutes.get("/v1/", authMiddleware, fetchUsersCtrl);
 userRoutes.delete("/v1/:id", deleteUserCtrl);
 userRoutes.get("/v1/:id", fetchUserDetailsCtrl);

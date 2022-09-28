@@ -243,7 +243,7 @@ const generateVerificationTokenCtrl = expressAsyncHandler(async (req, res) => {
     const msg = {
       to: 'amal.thms@gmail.com', // Change to your recipient
       from: 'amal.thms@gmail.com', // Change to your verified sender
-      subject: 'Sending with SendGrid is Fun',
+      subject: 'Express: verify account',
       html: resetURL,
     }
     await sgMail.send(msg);
@@ -271,10 +271,60 @@ const accountVerificationCtrl = expressAsyncHandler(async (req, res) => {
   userFound.accountVerficationTokenExpires = undefined
   await userFound.save();
   res.json(userFound)
+})
+//---------------------------------------
+//Forgot token generator
+//-----------------------------------------
+const forgetPasswordToken = expressAsyncHandler(async (req, res) => {
+  //find the user by email
+  const { email } = req.body
+  const user = await User.findOne({ email })
+  if (!user) throw new Error("User not found")
 
-  console.log(hashedToken)
+  try {
+    const token = await user.createPasswordResetToken()
+    console.log(token)
+    await user.save();
+
+    //build your message
+    const resetURL = `Reset your password within 10 minutes 
+    <a href="http://localhost:3000/reset-password/${token}">
+    Click to reset
+    </a>`
+    const msg = {
+      to: email, // Change to your recipient
+      from: 'amal.thms@gmail.com', // Change to your verified sender
+      subject: 'Express: Reset password',
+      html: resetURL,
+    };
+
+    await sgMail.send(msg);
+    res.json({
+      msg: `A verification message is successfully sent to ${user?.email}.Reset now within 10 minutes, ${resetURL}`
+    })
+  } catch (error) {
+    res.json(error)
+  }
+
 })
 
+//---------------------------------------
+//Passsword reset
+//-------------------------------------------
+const passwordResetCtrl = expressAsyncHandler(async (req, res) => {
+  const { token, password } = req.body
+  const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+  //find this user by token
+  const user = await User.findOne({ passwordResetToken: hashedToken, passwordResetExpires: { $gt: new Date() } })
+  if (!user) throw new Error("Token expires, try again");
+
+  //update the paSSword
+  user.password = password;
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
+  await user.save()
+  res.json(user);
+});
 
 //----------------------------------------
 //PROFILE PHOTO UPLOAD
@@ -308,5 +358,7 @@ module.exports = {
   unblockUserCtrl,
   generateVerificationTokenCtrl,
   accountVerificationCtrl,
+  forgetPasswordToken,
+  passwordResetCtrl,
   profilePhotoUploadCtrl,
 };
