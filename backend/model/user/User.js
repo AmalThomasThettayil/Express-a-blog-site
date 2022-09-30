@@ -94,6 +94,13 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 })
 
+//virtual method to populate created post
+userSchema.virtual('posts', {
+    ref: 'Post',
+    foreignField: 'user',
+    localField: '_id'
+})
+
 //Hash password
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {

@@ -32,6 +32,15 @@ error in upload to cloudinary:path not found
 41 forgot password utility
 42 part 2
 43 part 3
+29-9-22
+image not uploading to cloudinary
+48 post api
+50 profane words prevebntion
+bad words npm
+30-9-22
+54 fs for deleting uploaded images from folder
+59 delete post
+
 
 
 

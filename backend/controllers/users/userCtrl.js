@@ -1,5 +1,6 @@
 const expressAsyncHandler = require("express-async-handler");
 const sgMail = require("@sendgrid/mail");
+const fs = require("fs")
 const crypto = require("crypto")
 const generateToken = require("../../config/token/generateToken");
 const User = require("../../model/user/User");
@@ -92,7 +93,7 @@ const userProfileCtrl = expressAsyncHandler(async (req, res) => {
   const { id } = req.params
   validateMongodbId(id)
   try {
-    const myProfile = await User.findById(id)
+    const myProfile = await User.findById(id).populate("posts")
     res.json(myProfile);
   } catch {
     res.json(error)
@@ -332,15 +333,23 @@ const passwordResetCtrl = expressAsyncHandler(async (req, res) => {
 
 const profilePhotoUploadCtrl = expressAsyncHandler(async (req, res) => {
   //Find the login user
-  console.log(req.user)
+  const { _id } = req.user
+
   //1. Get the path to img
-  const localPath = `public/images/profile/${req.file.filename} `
+  const localPath = `public/images/profile/${req.file.filename}`;
   //2. Upload to cloudinary
   const imgUploaded = await cloudinaryUploadImg(localPath);
-  console.log(imgUploaded)
-  res.json(localPath);
 
-})
+  const foundUser = await User.findByIdAndUpdate(_id, {
+    profilePhoto: imgUploaded?.url,
+  }, { new: true })
+
+  //remove the saved images
+  fs.unlinkSync(localPath);
+
+  res.json(imgUploaded);
+
+});
 
 
 module.exports = {
