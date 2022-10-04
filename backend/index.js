@@ -5,12 +5,13 @@ dotenv.config()
 const dbConnect = require("./config/db/dbConnect");
 const userRoutes = require("./route/users/usersRoute");
 const { errorHandler, notFound } = require("./middlewares/error/errorHandler");
-const postRoute = require("./route/posts/postRoute")
-
+const postRoute = require("./route/posts/postRoute");
 const app = express();
 
 const swaggerUi = require('swagger-ui-express')
 const YAML = require('yamljs');
+const commentRouter = require("./route/comments/commentRoute");
+const emailRouter = require("./route/email/emailRoute");
 const swaggerDocument = YAML.load('./swagger.yaml');
 
 //db 
@@ -30,6 +31,13 @@ app.use("/api", userRoutes)
 
 //post route
 app.use("/api/posts", postRoute);
+
+//comment route
+app.use("/api/comments", commentRouter);
+
+//email route
+app.use("/api/email", emailRouter);
+
 
 //error handler
 app.use(notFound)

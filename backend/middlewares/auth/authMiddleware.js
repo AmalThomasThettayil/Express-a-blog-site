@@ -4,7 +4,7 @@ const User = require("../../model/user/User");
 
 const authMiddleware = expressAsyncHandler(async (req, res, next) => {
     let token;
-    
+
     if (req?.headers?.authorization?.startsWith("Bearer")) {
         try {
             token = req.headers.authorization.split(" ")[1];
@@ -15,11 +15,11 @@ const authMiddleware = expressAsyncHandler(async (req, res, next) => {
                 //attach the user to the request object
                 req.user = user
                 next();
-            } 
+            }
         } catch (error) {
             throw new Error("Not authorized token expired, login again")
         }
-    }else{
+    } else {
         throw new Error("There is no token attached to the header")
     }
 })

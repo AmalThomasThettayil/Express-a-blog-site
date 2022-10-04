@@ -5,6 +5,9 @@ const {
     fetchPostCtrl,
     updatePostCtrl,
     deletePostCtrl,
+    toggleAddLikeToPostCtrl,
+    toggleAndDislikeToPostCtrl,
+
 } = require("../../controllers/posts/postCtrl");
 const postRoute = express.Router();
 const authMiddleware = require('../../middlewares/auth/authMiddleware');
@@ -20,6 +23,14 @@ postRoute.post("/",
     postImgResize,
     createPostCtrl,
 );
+postRoute.put("/likes",
+    authMiddleware,
+    toggleAddLikeToPostCtrl,
+);
+postRoute.put("/dislikes",
+    authMiddleware,
+    toggleAndDislikeToPostCtrl,
+);
 postRoute.get("/", fetchPostsCtrl);
 postRoute.get("/:id", fetchPostCtrl);
 postRoute.put("/:id",
@@ -27,4 +38,6 @@ postRoute.put("/:id",
     updatePostCtrl
 );
 postRoute.delete("/:id", deletePostCtrl);
+
+
 module.exports = postRoute;
