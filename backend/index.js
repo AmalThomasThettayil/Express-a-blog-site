@@ -12,6 +12,7 @@ const swaggerUi = require('swagger-ui-express')
 const YAML = require('yamljs');
 const commentRouter = require("./route/comments/commentRoute");
 const emailRouter = require("./route/email/emailRoute");
+const categoryRoute = require("./route/category/categoryRoute");
 const swaggerDocument = YAML.load('./swagger.yaml');
 
 //db 
@@ -38,6 +39,8 @@ app.use("/api/comments", commentRouter);
 //email route
 app.use("/api/email", emailRouter);
 
+//category route
+app.use("/api/category", categoryRoute);
 
 //error handler
 app.use(notFound)
