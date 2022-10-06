@@ -39,7 +39,7 @@ app.use("/api/comments", commentRouter);
 //email route
 app.use("/api/email", emailRouter);
 
-//category route
+// category route
 app.use("/api/category", categoryRoute);
 
 //error handler

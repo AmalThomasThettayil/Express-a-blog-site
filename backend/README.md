@@ -42,6 +42,10 @@ bad words npm
 59 delete post
 5-10-22
 74. category creation
+markdown editors: 
+ckeditor5
+jodit
+
 
 
 
