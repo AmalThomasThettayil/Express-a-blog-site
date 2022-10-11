@@ -2,10 +2,10 @@ export const env = {
   browser: true,
   es2021: true,
 };
-export const extends =[
-  'plugin:react/recommended',
-  'airbnb',
-];
+// export const extends =[
+//   'plugin:react/recommended',
+//   'airbnb',
+// ];
 export const overrides = [];
 export const parserOptions = {
   ecmaVersion: 'latest',

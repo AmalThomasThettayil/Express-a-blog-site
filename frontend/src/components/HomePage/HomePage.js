@@ -15,12 +15,10 @@ const homePage = () => {
                 {/* <span className="text-black">By creating a post</span> */}
               </h2>
               <p className="mb-12 lg:mb-16 2xl:mb-24 text-xl text-black font-bold">
-              Discover stories, thinking, and expertise from writers on any topic.
+                Discover stories, thinking, and expertise from writers on any topic.
               </p>
-              <a
-                className="inline-block px-12 py-5 text-lg text-white font-bold bg-black hover:bg-yellow-500 hover:text-black rounded-full transition duration-200"
-                href="/"
-              >
+              <a className="inline-block px-12 py-5 text-lg text-white font-bold bg-black hover:bg-yellow-500 hover:text-black rounded-full transition duration-200"
+                href="/">
                 Start reading
               </a>
             </div>

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from 'axios'
-import  baseUrl  from "../../../utils/baseURL"
+import baseUrl from "../../../utils/baseURL"
 
 
 //register action
@@ -15,7 +15,7 @@ export const registerUserAction = createAsyncThunk(
         }
         try {
             //http call
-            
+
             const { data } = await axios.post(
                 `${baseUrl}/api/v1/register`,
                 user,
@@ -41,13 +41,13 @@ export const loginUserAction = createAsyncThunk(
             }
         }
         try {
-            const {data} = await axios.post(
+            const { data } = await axios.post(
                 `${baseUrl}/api/v1/login`,
                 userData,
                 config,
             )
             //save user into local storage
-            localStorage.setItem("userInfo",JSON.stringify(data));
+            localStorage.setItem("userInfo", JSON.stringify(data));
             return data;
         } catch (error) {
             if (!error.response) {
@@ -60,27 +60,27 @@ export const loginUserAction = createAsyncThunk(
 //logout action
 export const logoutAction = createAsyncThunk(
     '/user/logout',
-    async (payload,{rejectwithvalue,getState,dispatch}) =>{
-        try{
-localStorage.removeItem("userInfo")
-        }catch(error){
-if(!error?.response){
-    throw error
-}
-return rejectwithvalue(error?.response?.data)
+    async (payload, { rejectwithvalue, getState, dispatch }) => {
+        try {
+            localStorage.removeItem("userInfo")
+        } catch (error) {
+            if (!error?.response) {
+                throw error
+            }
+            return rejectwithvalue(error?.response?.data)
         }
     }
 )
 
 //get user from local storage and place into store
-const userLoginFromStorage = localStorage.getItem("userInfo")? JSON.parse(localStorage.getItem("userInfo"))
-: null;
+const userLoginFromStorage = localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo"))
+    : null;
 
 //slices
 const userSlices = createSlice({
     name: "users",
     initialState: {
-        userAuth:userLoginFromStorage,
+        userAuth: userLoginFromStorage,
     },
     extraReducers: builders => {
         //register
@@ -119,22 +119,20 @@ const userSlices = createSlice({
             state.loading = false;
         });
         //logout
-        builders.addCase(logoutAction.pending,(state,action)=>{
+        builders.addCase(logoutAction.pending, (state, action) => {
             state.loading = false;
         })
-        builders.addCase(logoutAction.fulfilled,(state,action)=>{
+        builders.addCase(logoutAction.fulfilled, (state, action) => {
             state.userAuth = undefined;
             state.loading = false;
             state.appErr = undefined;
-            state.serverErr= undefined;
+            state.serverErr = undefined;
         })
-        builders.addCase(logoutAction.rejected,(state,action)=>{
+        builders.addCase(logoutAction.rejected, (state, action) => {
             state.appErr = action?.payload?.message;
             state.serverErr = action?.error?.message;
             state.loading = false
         })
-        
-
     }
 })
 export default userSlices.reducer;

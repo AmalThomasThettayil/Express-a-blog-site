@@ -42,9 +42,16 @@ bad words npm
 59 delete post
 5-10-22
 74. category creation
+6-10-22
 markdown editors: 
 ckeditor5
 jodit
+redux:
+1. action: Change user needs to do
+2. reducer: checks the action type and make changes to the store
+3. dispatch: changes made by the reducer are taken to the store by dispatch
+4. store: changes are stored in the store , also notifies the user/ component
+
 
 
 

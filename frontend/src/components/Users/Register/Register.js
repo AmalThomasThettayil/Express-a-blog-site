@@ -41,7 +41,7 @@ const Register = () => {
   //select state from store
   const storeData = useSelector(store => store?.users);
   const { loading, appErr, serverErr, registered } = storeData;
-  console.log(registered);
+  console.log(appErr, serverErr, registered);
   //redirect
   if (registered) {
     return <Redirect to="/profile" />;
@@ -66,8 +66,8 @@ const Register = () => {
                     Register Account
                     {/* display error message*/}
                     {appErr || serverErr ? (
-                      <div className="text-red-400">
-                        {serverErr} {appErr}
+                      <div className="text-red-600">
+                        {serverErr}:{appErr}
                       </div>
                     ) : null}
                   </h3>
@@ -122,7 +122,7 @@ const Register = () => {
                     />
                   </div>
                   {/* Err msg*/}
-                  <div className="text-red-400 mb-2">
+                  <div className="text-red-600 mb-2">
                     {formik.touched.firstName && formik.errors.firstName}
                   </div>
                   {/* Last name */}
@@ -175,7 +175,7 @@ const Register = () => {
                     />
                   </div>
                   {/* Err msg*/}
-                  <div className="text-red-400 mb-2">
+                  <div className="text-red-600 mb-2">
                     {formik.touched.lastName && formik.errors.lastName}
                   </div>
                   {/* Email */}
@@ -228,7 +228,7 @@ const Register = () => {
                     />
                   </div>
                   {/* Err msg*/}
-                  <div className="text-red-400 mb-2">
+                  <div className="text-red-600 mb-2">
                     {formik.touched.email && formik.errors.email}
                   </div>
                   <div className="flex items-center pl-6 mb-3 bg-white rounded-full">
@@ -261,7 +261,7 @@ const Register = () => {
                     />
                   </div>
                   {/* Err msg*/}
-                  <div className="text-red-400 mb-2">
+                  <div className="text-red-600 mb-2">
                     {formik.touched.password && formik.errors.password}
                   </div>
 
@@ -273,7 +273,7 @@ const Register = () => {
                       disabled
                       className="py-4 w-full bg-gray-500  text-white font-bold rounded-full transition duration-200"
                     >
-                      loading please wait...
+                      Loading please wait...
                     </button>
                   ) : (
                     <button

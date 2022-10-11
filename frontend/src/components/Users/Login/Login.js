@@ -53,7 +53,7 @@ const Login = () => {
                                             Login to your Account
                                         </h3>
                                         {/* display error */}
-                                        {serverErr || appErr ? <h2 className="text-red-500">{serverErr}-{appErr}</h2> : null}
+                                        {serverErr || appErr ? <h2 className="text-red-500">{serverErr}:{appErr}</h2> : null}
                                         <div className="flex items-center pl-6 mb-3 border border-gray-50 bg-white rounded-full">
                                             <span className="inline-block pr-3 border-r border-gray-50">
                                                 <svg
