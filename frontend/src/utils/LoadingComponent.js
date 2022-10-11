@@ -11,7 +11,7 @@ const override: CSSProperties = {
 const Loadingcomponent = () => {
     return (
 
-        <RiseLoader color='red' loading={true} css={ } />
+        <RiseLoader color='red' loading={true} css={override} />
     )
 }
 export default Loadingcomponent;

@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { PencilAltIcon } from "@heroicons/react/outline";
 import { fetchCategoriesAction } from "../../redux/slices/category/categorySlice";
 import DateFormatter from "../../utils/DateFormatter";
+import Loadingcomponent from "../../utils/LoadingComponent";
 
 const CategoryList = () => {
   const dispatch = useDispatch();
@@ -18,16 +19,17 @@ const CategoryList = () => {
   return (
     <>
       {loading ? (
-        <h2 className="text-center text-3xl text-green-800">Loading</h2>
-      ) : appErr || serverErr ? (
-        <h2 className="text-center text-3xl text-red-600">
-          {serverErr} {serverErr}
-        </h2>
-      ) : categoryList?.length <= 0 ? (
-        <h2 className="text-center text-3xl text-green-800">
-          No category Found
-        </h2>
-      ) : (
+        <>
+          <Loadingcomponent />
+        </>) : appErr || serverErr ? (
+          <h2 className="text-center text-3xl text-red-600">
+            {serverErr} {serverErr}
+          </h2>
+        ) : categoryList?.length <= 0 ? (
+          <h2 className="text-center text-3xl text-green-800">
+            No category Found
+          </h2>
+        ) : (
         <div className="flex flex-col">
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -91,7 +93,7 @@ const CategoryList = () => {
                           {<DateFormatter date={category?.createdAt} />}
 
                         </td>
-                        <Link>
+                        <Link to={`/update-category/${category?._id}`}>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             <PencilAltIcon className="h-5 text-indigo-500" />
                           </td>
