@@ -3,14 +3,12 @@ import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 
 
-const PrivateProtectRoute = ({ component: Component, ...rest }) => {
+const AdminRoute = ({ component: Component, ...rest }) => {
     //check if user is login
     const user = useSelector(state => state.users)
     const { userAuth } = user;
     return (
-        <Route {...rest} render={() => userAuth ? <Component{...rest} /> : <Redirect to='/login' />} />
-
-
+        <Route {...rest} render={() => userAuth.isAdmin ? <Component{...rest} /> : <Redirect to='/login' />} />
     )
 }
-export default PrivateProtectRoute;
+export default AdminRoute;

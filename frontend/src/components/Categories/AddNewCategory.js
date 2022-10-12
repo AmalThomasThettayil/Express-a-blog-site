@@ -8,7 +8,7 @@ import { Redirect } from "react-router-dom";
 
 //Form schema
 const formSchema = Yup.object({
-    title: Yup.string().required("Title is required"),
+    title: Yup.string().required("Category is required"),
 });
 
 const AddNewCategory = () => {
@@ -37,12 +37,19 @@ const AddNewCategory = () => {
         <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8">
                 <div>
-                    <BookOpenIcon className="mx-auto h-12 w-auto" />
-                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                    {/* Logo */}
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mx-auto w-10 h-10">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652
+                     2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0
+                      0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                    </svg>
+                    <h2 className="mt-6 text-center text-3xl font-extrabold text-black-900">
                         Add New Category
                     </h2>
                     <p className="mt-2 text-center text-sm text-gray-600">
-                        <p className="font-medium text-indigo-600 hover:text-indigo-500">
+                        <p className="font-medium text-black-600 hover:text-black-500">
                             These are the categories user will select when creating a post
                         </p>
                         {/*Display err */}
@@ -95,11 +102,11 @@ const AddNewCategory = () => {
                                 Loading please wait...
                             </button>) : (<button
                                 type="submit"
-                                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-black bg-yellow-500 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             >
                                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                                     <PlusCircleIcon
-                                        className="h-5 w-5 text-yellow-500 group-hover:text-indigo-400"
+                                        className="h-5 w-5 text-green-700 group-hover:text-yellow-400"
                                         aria-hidden="true"
                                     />
                                 </span>
