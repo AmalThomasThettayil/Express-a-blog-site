@@ -1,4 +1,4 @@
-import { PlusCircleIcon, BookOpenIcon } from "@heroicons/react/solid";
+import { PlusCircleIcon } from "@heroicons/react/solid";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCategoriesAction, fetchCategoryAction, updateCategoriesAction } from "../../redux/slices/category/categorySlice";

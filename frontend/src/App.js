@@ -6,6 +6,7 @@ import HomePage from "./components/HomePage/HomePage";
 import Navbar from "./components/Navigation/Navbar";
 import AdminRoute from "./components/Navigation/ProtectedRoute/AdminProtectedRoute";
 import PrivateProtectRoute from "./components/Navigation/ProtectedRoute/PrivateProtectedRoute";
+import CreatePost from "./components/Posts/CreatePost";
 import Login from "./components/Users/Login/Login";
 import Register from "./components/Users/Register/Register";
 
@@ -14,6 +15,7 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Switch>
+        <PrivateProtectRoute exact path="/create-post" component={CreatePost} />
         <AdminRoute exact path="/add-category" component={AddNewCategory} />
         <AdminRoute exact path="/category-list" component={CategoryList} />
         <AdminRoute exact path="/update-category/:id" component={UpdateCategory} />

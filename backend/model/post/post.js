@@ -9,8 +9,8 @@ const postSchema = new mongoose.Schema({
     //created by admin only
     category: {
         type: String,
-        //required: [true, "Post category is required"],
-        default: "All",
+        required: [true, "Post category is required"],
+
     },
     isLiked: {
         type: Boolean,
