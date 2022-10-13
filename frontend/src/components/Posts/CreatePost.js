@@ -8,6 +8,7 @@ import CategoryDropDown from "../Categories/CategoryDropDown";
 const formSchema = Yup.object({
     title: Yup.string().required("Title is required"),
     description: Yup.string().required("Description is required"),
+    category: Yup.object().required("Category is required")
 });
 
 export default function CreatePost() {
@@ -16,11 +17,18 @@ export default function CreatePost() {
     const formik = useFormik({
         initialValues: {
             title: "",
-            Description: "",
+            description: "",
+            category: "",
         },
         onSubmit: values => {
             //dispath the action
-            dispatch(createpostAction(values));
+            console.log(values);
+            const data = {
+                category: values?.category?.label,
+                title: values?.title,
+                description: values?.description,
+            }
+            dispatch(createpostAction(data));
         },
         validationSchema: formSchema,
     });
@@ -64,10 +72,18 @@ export default function CreatePost() {
                                     />
                                 </div>
                                 {/* Err msg */}
-                                <div className="text-red-500">{formik?.touched?.title}</div>
+                                <div className="text-red-500">{
+                                    formik?.touched?.title && formik?.errors?.title
+                                }</div>
                             </div>
                             {/* Category input goes here */}
-                            <CategoryDropDown />
+                            <CategoryDropDown
+                                value={formik.values.category?.label}
+                                onChange={formik.setFieldValue}
+                                onblur={formik.setFieldTouched}
+                                error={formik.errors.category}
+                                touched={formik.touched.category}
+                            />
                             <div>
                                 <label
                                     htmlFor="password"
@@ -87,7 +103,7 @@ export default function CreatePost() {
                                 ></textarea>
                                 {/* Err msg */}
                                 <div className="text-red-500">
-                                    {formik?.touched?.description}
+                                    {formik?.touched?.description && formik.errors.description}
                                 </div>
                             </div>
                             <div>
