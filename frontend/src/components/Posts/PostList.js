@@ -3,18 +3,36 @@ import { ThumbUpIcon, ThumbDownIcon, EyeIcon } from "@heroicons/react/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchPostsAction } from "../../redux/slices/posts/postSlices";
+import DateFormatter from "../../utils/DateFormatter";
+import { fetchCategoriesAction } from "../../redux/slices/category/categorySlice";
+import Loadingcomponent from "../../utils/LoadingComponent";
 
 export default function PostsList() {
     //dispatch
     const dispatch = useDispatch();
+    //fetch post
     useEffect(() => {
         dispatch(fetchPostsAction());
     }, [dispatch]);
 
+    //fetch categories
+    useEffect(() => {
+        dispatch(fetchCategoriesAction());
+    }, [dispatch]);
+
     //select post from store
     const post = useSelector(state => state?.post)
+    const { postLists, loading, appErr, serverErr } = post;
 
-    const { PostsList, loading, appErr, serverErr } = post;
+    //select category from store
+    const category = useSelector(state => state?.category)
+    console.log(category);
+    const { categoryList,
+        loading: catLoading,
+        appErr: catAppErr,
+        serverErr: catServerErr,
+    } = category;
+    console.log(categoryList, catLoading, catAppErr, catServerErr);
     return (
         <>
             <section>
@@ -43,37 +61,39 @@ export default function PostsList() {
                                         Categories
                                     </h4>
                                     <ul>
-                                        <div>Loading</div>
-
-                                        <div className="text-red-400 text-base">
-                                            Categories Error goes here
-                                        </div>
-
-                                        <div className="text-xl text-gray-100 text-center">
-                                            No category
-                                        </div>
-
-                                        <li>
-                                            <p className="block cursor-pointer py-2 px-3 mb-4 rounded text-yellow-500 font-bold bg-gray-500">
-                                                {/* {category?.title} */} category List
-                                            </p>
-                                        </li>
+                                        {catLoading ? (
+                                            <Loadingcomponent />
+                                        ) : catAppErr || catServerErr ? (
+                                            <h1>
+                                                {catServerErr} {catAppErr}
+                                            </h1>
+                                        ) : categoryList?.lenght <= 0 ? (
+                                            <h1>No Category Found</h1>
+                                        ) : (
+                                            categoryList?.map(category => (
+                                                <li>
+                                                    <p className="block cursor-pointer py-2 px-3 mb-4 rounded text-yellow-500 font-bold bg-gray-500">
+                                                        {category?.title}
+                                                    </p>
+                                                </li>
+                                            ))
+                                        )}
                                     </ul>
                                 </div>
                             </div>
                             <div class="w-full lg:w-3/4 px-3">
                                 {/* post goes here */}
-                                {loading ? <h1>Loading...</h1> :
-                                    appErr || serverErr ? <h1>Err</h1> :
-                                        postsLists?.length <= 0 ? <h1>No Post found!</h1> :
-                                            postsLists.map(() => (
+                                {loading ? <Loadingcomponent /> :
+                                    appErr || serverErr ? <h1>{serverErr} {appErr}</h1> :
+                                        postLists?.length <= 0 ? <h1>No Post found!</h1> :
+                                            postLists?.map((post) => (
                                                 <div class="flex flex-wrap bg-gray-900 -mx-3  lg:mb-6">
                                                     <div class="mb-10  w-full lg:w-1/4 px-3">
                                                         <Link>
                                                             {/* Post image */}
                                                             <img
                                                                 class="w-full h-full object-cover rounded"
-                                                                src="https://cdn.pixabay.com/photo/2021/02/24/23/43/boy-6047786_960_720.jpg"
+                                                                src={post?.image}
                                                                 alt=""
                                                             />
                                                         </Link>
@@ -85,14 +105,14 @@ export default function PostsList() {
                                                                 <div className="">
                                                                     <ThumbUpIcon className="h-7 w-7 text-indigo-600 cursor-pointer" />
                                                                 </div>
-                                                                <div className="pl-2 text-gray-600">(2)</div>
+                                                                <div className="pl-2 text-gray-600">{post?.likes?.length}</div>
                                                             </div>
                                                             {/* Dislike */}
                                                             <div className="flex flex-row  justify-center items-center ml-4 mr-4 pb-2 pt-1">
                                                                 <div>
                                                                     <ThumbDownIcon className="h-7 w-7 cursor-pointer text-gray-600" />
                                                                 </div>
-                                                                <div className="pl-2 text-gray-600">(2)</div>
+                                                                <div className="pl-2 text-gray-600">{post?.disLikes?.length}</div>
                                                             </div>
                                                             {/* Views */}
                                                             <div className="flex flex-row justify-center items-center ml-4 mr-4 pb-2 pt-1">
@@ -100,7 +120,7 @@ export default function PostsList() {
                                                                     <EyeIcon className="h-7 w-7  text-gray-400" />
                                                                 </div>
                                                                 <div className="pl-2 text-gray-600">
-                                                                    {/* {post?.numViews} */}2
+                                                                    {post?.numViews}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -108,10 +128,10 @@ export default function PostsList() {
                                                     <div class="w-full lg:w-3/4 px-3">
                                                         <Link class="hover:underline">
                                                             <h3 class="mb-1 text-2xl text-green-400 font-bold font-heading">
-                                                                {/* {capitalizeWord(post?.title)} */} post title
+                                                                {/* {capitalizeWord(post?.title)} */}  {post?.title}
                                                             </h3>
                                                         </Link>
-                                                        <p class="text-gray-300">post description</p>
+                                                        <p class="text-gray-300"> {post?.description}</p>
                                                         {/* Read more */}
                                                         <Link className="text-indigo-500 hover:underline">
                                                             Read More..
@@ -122,7 +142,7 @@ export default function PostsList() {
                                                                 <Link>
                                                                     <img
                                                                         className="h-10 w-10 rounded-full"
-                                                                        src="https://cdn.pixabay.com/photo/2021/02/24/23/43/boy-6047786_960_720.jpg"
+                                                                        src={post?.user?.profilePhoto}
                                                                         alt=""
                                                                     />
                                                                 </Link>
@@ -130,13 +150,12 @@ export default function PostsList() {
                                                             <div className="ml-3">
                                                                 <p className="text-sm font-medium text-gray-900">
                                                                     <Link className="text-yellow-400 hover:underline ">
-                                                                        user full name
+                                                                        {post?.user?.firstName} {post?.user?.lastName}
                                                                     </Link>
                                                                 </p>
                                                                 <div className="flex space-x-1 text-sm text-green-500">
                                                                     <time>
-                                                                        {/* <DateFormatter date={post?.createdAt} /> */}
-                                                                        Post date
+                                                                        <DateFormatter date={post?.createdAt} />
                                                                     </time>
                                                                     <span aria-hidden="true">&middot;</span>
                                                                 </div>

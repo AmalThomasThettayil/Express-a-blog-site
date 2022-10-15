@@ -3,11 +3,11 @@ import { css } from '@emotion/react'
 import RiseLoader from "react-spinners/ClipLoader";
 
 //css
-const override: CSSProperties = {
-    display: "block",
-    margin: "0 auto",
-    borderColor: "red",
-};
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 const Loadingcomponent = () => {
     return (
 

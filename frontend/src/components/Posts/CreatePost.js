@@ -6,6 +6,8 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { createpostAction } from "../../redux/slices/posts/postSlices";
 import CategoryDropDown from "../Categories/CategoryDropDown";
+import React, { useRef, } from 'react';
+import JoditEditor from 'jodit-react';
 
 //Form schema
 const formSchema = Yup.object({
@@ -31,6 +33,7 @@ border-color:'red'
 `;
 
 export default function CreatePost() {
+    const editor = useRef(null);
     const dispatch = useDispatch();
 
     //select store data
@@ -131,7 +134,14 @@ export default function CreatePost() {
                                     Description
                                 </label>
                                 {/* Description */}
-                                <textarea
+                                <JoditEditor
+                                    ref={editor}
+                                    value={formik.values.description}
+                                    onChange={formik.handleChange("description")}
+                                    onBlur={formik.handleBlur("description")}
+                                    tabIndex={1} // tabIndex of textarea
+                                />
+                                {/* <textarea
                                     value={formik.values.description}
                                     onChange={formik.handleChange("description")}
                                     onBlur={formik.handleBlur("description")}
@@ -139,7 +149,7 @@ export default function CreatePost() {
                                     cols="10"
                                     className="rounded-lg appearance-none block w-full py-3 px-3 text-base text-center leading-tight text-gray-600 bg-transparent focus:bg-transparent  border border-gray-200 focus:border-gray-500  focus:outline-none"
                                     type="text"
-                                ></textarea>
+                                ></textarea> */}
                                 {/* Image component */}
                                 <label
                                     htmlFor="password"
