@@ -22,7 +22,7 @@ export const createpostAction = createAsyncThunk(
             const formData = new FormData();
             formData.append("title", post?.title);
             formData.append("description", post?.description);
-            formData.append("category", post?.category?.label);
+            formData.append("category", post?.category);
             formData.append("image", post?.image);
 
             const { data } = await axios.post(
@@ -41,23 +41,92 @@ export const createpostAction = createAsyncThunk(
 );
 
 //fetch all posts
-
 export const fetchPostsAction = createAsyncThunk(
     "post/list",
-    async (post, { rejectWithValue, getState, dispatch }) => {
 
+    async (category, { rejectWithValue, getState, dispatch }) => {
         try {
-
             const { data } = await axios.get(
-                `${baseUrl}/api/posts`,
+                `${baseUrl}/api/posts?category=${category}`,
             );
             return data;
         } catch (error) {
+            console.log(error);
             if (!error?.response) throw error;
             return rejectWithValue(error?.response?.data);
         }
     }
 );
+
+//fetch post details
+export const fetchPostDetailsAction = createAsyncThunk(
+    "post/detail",
+
+    async (id, { rejectWithValue, getState, dispatch }) => {
+        try {
+            const { data } = await axios.get(
+                `${baseUrl}/api/posts/${id}`,
+            );
+            console.log(data);
+            return data;
+        } catch (error) {
+            console.log(error);
+            if (!error?.response) throw error;
+            return rejectWithValue(error?.response?.data);
+        }
+    }
+);
+
+//likes to posts
+export const toggleAddLikesToPost = createAsyncThunk(
+    'post/like',
+    async (postId, { rejectWithValue, getState, dispatch }) => {
+        //get user token
+        const user = getState()?.users;
+        const { userAuth } = user;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userAuth?.token}`,
+            },
+        };
+        try {
+            const { data } = await axios.put(
+                `${baseUrl}/api/posts/likes`,
+                { postId },
+                config,
+            );
+            return data
+        } catch (error) {
+            if (!error?.response) throw error;
+            return rejectWithValue(error?.response?.data);
+        }
+    })
+
+//dislikes to posts
+export const toggleAddDislikesToPost = createAsyncThunk(
+    'post/dislike',
+    async (postId, { rejectWithValue, getState, dispatch }) => {
+        //get user token
+        const user = getState()?.users;
+        const { userAuth } = user;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userAuth?.token}`,
+            },
+        };
+        try {
+            const { data } = await axios.put(
+                `${baseUrl}/api/posts/dislikes`,
+                { postId },
+                config,
+            );
+            return data
+        } catch (error) {
+            if (!error?.response) throw error;
+            return rejectWithValue(error?.response?.data);
+        }
+    })
+
 
 //slice
 
@@ -97,6 +166,56 @@ const postSlice = createSlice({
             state.serverErr = undefined;
         });
         builder.addCase(fetchPostsAction.rejected, (state, action) => {
+            state.loading = false;
+            state.appErr = action?.payload?.message;
+            state.serverErr = action?.error?.message;
+        });
+
+        //fetch post details
+        builder.addCase(fetchPostDetailsAction.pending, (state, action) => {
+            state.loading = true;
+        });
+
+        builder.addCase(fetchPostDetailsAction.fulfilled, (state, action) => {
+            state.postDetails = action?.payload;
+            state.loading = false;
+            state.appErr = undefined;
+            state.serverErr = undefined;
+        });
+        builder.addCase(fetchPostDetailsAction.rejected, (state, action) => {
+            state.loading = false;
+            state.appErr = action?.payload?.message;
+            state.serverErr = action?.error?.message;
+        });
+
+        //like post
+        builder.addCase(toggleAddLikesToPost.pending, (state, action) => {
+            state.loading = true;
+        });
+
+        builder.addCase(toggleAddLikesToPost.fulfilled, (state, action) => {
+            state.likes = action?.payload;
+            state.loading = false;
+            state.appErr = undefined;
+            state.serverErr = undefined;
+        });
+        builder.addCase(toggleAddLikesToPost.rejected, (state, action) => {
+            state.loading = false;
+            state.appErr = action?.payload?.message;
+            state.serverErr = action?.error?.message;
+        });
+        //dislike post
+        builder.addCase(toggleAddDislikesToPost.pending, (state, action) => {
+            state.loading = true;
+        });
+
+        builder.addCase(toggleAddDislikesToPost.fulfilled, (state, action) => {
+            state.dislikes = action?.payload;
+            state.loading = false;
+            state.appErr = undefined;
+            state.serverErr = undefined;
+        });
+        builder.addCase(toggleAddDislikesToPost.rejected, (state, action) => {
             state.loading = false;
             state.appErr = action?.payload?.message;
             state.serverErr = action?.error?.message;
