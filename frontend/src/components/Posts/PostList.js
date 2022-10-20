@@ -51,30 +51,31 @@ export default function PostsList() {
     return (
         <>
             <section>
-                <div class="py-20 bg-gray-600 min-h-screen radius-for-skewed">
+                <div class="py-20 bg-black min-h-screen radius-for-skewed">
                     <div class="container mx-auto px-4">
                         <div class="mb-16 flex flex-wrap items-center">
                             <div class="w-full lg:w-1/2">
-                                <span class="text-green-600 font-bold">
+                                {/* <span class="text-green-600 font-bold">
                                     Latest Posts from our awesome authors
-                                </span>
-                                <h2 class="text-4xl text-gray-300 lg:text-5xl font-bold font-heading">
+                                </span> */}
+                                <h2 class="text-4xl text-yellow-300 lg:text-5xl font-bold font-heading">
                                     Latest Post
                                 </h2>
                             </div>
+
                             <div class=" block text-right w-1/2">
                                 {/* View All */}
                                 <button
                                     onClick={() => dispatch(fetchPostsAction(""))}
-                                    class="inline-block py-2 px-6 rounded-l-xl rounded-t-xl bg-green-600 hover:bg-green-700 text-gray-50 font-bold leading-loose transition duration-200">
+                                    class="inline-block py-2 px-6 rounded-l-xl rounded-t-xl bg-yellow-400 hover:bg-yellow-900 text-black-50 font-bold leading-loose transition duration-200">
                                     View All Posts
                                 </button>
                             </div>
                         </div>
                         <div class="flex flex-wrap -mx-3">
                             <div class="mb-8 lg:mb-0 w-full lg:w-1/4 px-3">
-                                <div class="py-4 px-6 bg-gray-600 shadow rounded">
-                                    <h4 class="mb-4 text-gray-500 font-bold uppercase">
+                                <div class="py-4 px-6 bg-black-600 shadow rounded">
+                                    <h4 class="mb-4 text-yellow-500 font-bold uppercase">
                                         Categories
                                     </h4>
                                     <ul>
@@ -85,13 +86,13 @@ export default function PostsList() {
                                                 {catServerErr} {catAppErr}
                                             </h1>
                                         ) : categoryList?.length <= 0 ? (
-                                            <h1>No Category Found</h1>
+                                            <h1 className="text-yellow-400 text-xl text-center">No Category Found</h1>
                                         ) : (
                                             categoryList?.map(category => (
                                                 <li>
                                                     <p
                                                         onClick={() => dispatch(fetchPostsAction(category?.title))}
-                                                        className="block cursor-pointer py-2 px-3 mb-4 rounded text-yellow-500 font-bold bg-gray-500">
+                                                        className="block cursor-pointer py-2 px-3 mb-4 rounded text-yellow-500 font-bold bg-gray-900 hover:bg-yellow-900 font-bold leading-loose transition duration-200">
                                                         {category?.title}
                                                     </p>
                                                 </li>
@@ -103,7 +104,7 @@ export default function PostsList() {
                             <div class="w-full lg:w-3/4 px-3">
                                 {/* post goes here */}
                                 {appErr || serverErr ? (<h1>{serverErr} {appErr}</h1>) :
-                                    postLists?.length <= 0 ? (<h1>No Post found!</h1>) :
+                                    postLists?.length <= 0 ? (<h1 className="text-black-400 text-xl text-center">No Post found!</h1>) :
                                         (postLists?.map(post => (
                                             <div
                                                 key={post.id}
