@@ -5,7 +5,9 @@ import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from "yup";
 import { loginUserAction } from '../../../redux/slices/users/userSlices';
-
+import { GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode";
+import { useGoogleLogin } from "@react-oauth/google";
 
 //Form schema
 const formSchema = Yup.object({
@@ -15,6 +17,15 @@ const formSchema = Yup.object({
 
 const Login = () => {
     const dispatch = useDispatch()
+
+    const login = useGoogleLogin({
+        onSuccess: (credentialResponse) => console.log(credentialResponse),
+    });
+
+    const googleAuth = (userData) => {
+        dispatch(loginUserAction(userData));
+    };
+
     //formik
     const formik = useFormik({
         initialValues: {
@@ -140,6 +151,29 @@ const Login = () => {
                                             </button>
                                         )}
                                     </form>
+
+                                    <span className="flex justify-center text-black-700 font-bold mt-2">
+                                        OR
+                                    </span>
+
+                                    <div className="flex items-center justify-center w-full shadow-xl  bg-blue-100 mt-2 py-1.5 font-bold rounded-full transition duration-200 hover:bg-blue-200 text-center ">
+                                        <GoogleLogin
+                                            onSuccess={(credentialResponse) => {
+                                                var decoded = jwt_decode(credentialResponse.credential);
+                                                const userData = {
+                                                    firstName: decoded.given_name,
+                                                    email: decoded.email,
+                                                    lastName: decoded.family_name,
+                                                    password: decoded.sub,
+                                                };
+
+                                                googleAuth(userData);
+                                            }}
+                                            onError={() => {
+                                                console.log("Login Failed");
+                                            }}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                             <div className="w-full lg:w-3/5 px-4 mb-16 lg:mb-0 order-first lg:order-last">
