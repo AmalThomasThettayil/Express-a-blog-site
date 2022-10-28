@@ -220,7 +220,7 @@ const unblockUserCtrl = expressAsyncHandler(async (req, res) => {
 })
 
 //-----------------------------------------
-//GENERATE EMAIL VERIFIACATION TOKEN
+//GENERATE EMAIL VERIFICATION TOKEN
 //-----------------------------------------
 
 const generateVerificationTokenCtrl = expressAsyncHandler(async (req, res) => {

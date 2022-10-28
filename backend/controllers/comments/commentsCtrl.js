@@ -58,7 +58,7 @@ const updateCommandCtrl = expressAsyncHandler(async (req, res) => {
     validateMongodbId(id)
     try {
         const update = await Comment.findByIdAndUpdate(id, {
-            post: req.body.postId,
+
             user: req?.user,
             description: req?.body?.description,
         }, {

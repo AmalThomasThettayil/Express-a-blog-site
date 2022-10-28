@@ -7,7 +7,7 @@ import {
   BellIcon,
   MenuIcon,
   XIcon,
-    LogoutIcon,
+  LogoutIcon,
 } from "@heroicons/react/outline";
 // import { PlusIcon } from "@heroicons/react/solid";
 import { logoutAction } from "../../../redux/slices/users/userSlices";
@@ -26,10 +26,10 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const AdminNavbar = () => {
+const AdminNavbar = ({ isLogin }) => {
   //Navigation
   const userNavigation = [
-    { name: "Your Profile", href: `/profile` },
+    { name: "Your Profile", href: `/profile/${isLogin?._id}` },
     { name: "Change your password", href: "/update-password" },
   ];
   //logout
@@ -130,8 +130,8 @@ const AdminNavbar = () => {
                           <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                             <span className="sr-only">Open user menu</span>
                             <img
-                              className="h-8 w-8 rounded-full"
-                              // src={userAuth?.profilePhoto}
+                              className="h-auto w-10 rounded-full"
+                              src={isLogin?.profilePhoto}
                               alt="Admin Profile"
                             />
                           </Menu.Button>
@@ -225,7 +225,7 @@ const AdminNavbar = () => {
               </div>
             </div>
           </Disclosure.Panel>
-          <hr style={{borderColor:"black"}}/>
+          <hr style={{ borderColor: "black" }} />
         </>
       )}
     </Disclosure>

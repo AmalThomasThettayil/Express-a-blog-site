@@ -6,7 +6,7 @@ import {
   BellIcon,
   MenuIcon,
   XIcon,
- } from "@heroicons/react/outline";
+} from "@heroicons/react/outline";
 import { LogoutIcon } from "@heroicons/react/solid";
 import { useDispatch } from "react-redux";
 import { logoutAction } from "../../../redux/slices/users/userSlices";
@@ -24,8 +24,9 @@ function classNames(...classes) {
 }
 
 const PrivateNavbar = ({ isLogin }) => {
+
   const userNavigation = [
-    { name: "Your Profile", href: `/profile` },
+    { name: "Your Profile", href: `/profile/${isLogin?._id}` },
     { name: "Change your password", href: "/update-password" },
   ];
 
@@ -65,7 +66,7 @@ const PrivateNavbar = ({ isLogin }) => {
                     className="relative inline-flex items-center py-2 border border-transparent shadow-sm text-xl 
                     font-medium rounded-md text-black bg-yellow-500 focus:outline-none"
                   >
-                    <span>Express</span>
+                    <span>private Express</span>
                   </Link>
                 </div>
 
@@ -127,8 +128,8 @@ const PrivateNavbar = ({ isLogin }) => {
                           <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                             <span className="sr-only">Open user menu</span>
                             <img
-                              className="h-8 w-8 rounded-full"
-                              // src={isLogin?.profilePhoto}
+                              className="h-10 w-auto rounded-full"
+                              src={isLogin?.profilePhoto}
                               alt=""
                             />
                           </Menu.Button>
@@ -226,7 +227,7 @@ const PrivateNavbar = ({ isLogin }) => {
               </div>
             </div>
           </Disclosure.Panel>
-          <hr style={{borderColor:"black"}}/>
+          <hr style={{ borderColor: "black" }} />
         </>
       )}
     </Disclosure>

@@ -6,16 +6,16 @@ import PublicNavbar from './Public/PublicNavbar'
 
 function Navbar() {
     const state = useSelector(state => state.users)
-    console.log(state);
     const { userAuth } = state;
     const isAdmin = userAuth?.isAdmin
-    console.log(isAdmin);
     return (
         <>
             {isAdmin ? (
-            <AdminNavbar />) : userAuth ? (
-            <PrivateNavbar />) : (
-            <PublicNavbar />)}
+                <AdminNavbar isLogin={userAuth} />)
+                : userAuth ? (
+                    <PrivateNavbar isLogin={userAuth} />)
+                    : (
+                        <PublicNavbar />)}
         </>
     )
 }

@@ -54,7 +54,7 @@ userRoutes.put("/v1/verify-account",
 userRoutes.put("/v1/unfollow", authMiddleware, unfollowUserCtrl);
 userRoutes.put("/v1/block-user/:id", authMiddleware, blockUserCtrl);
 userRoutes.put("/v1/unblock-user/:id", authMiddleware, unblockUserCtrl);
-userRoutes.put("/v1/:id", authMiddleware, updateUserCtrl);
+userRoutes.put("/v1", authMiddleware, updateUserCtrl);
 
 
 module.exports = userRoutes;

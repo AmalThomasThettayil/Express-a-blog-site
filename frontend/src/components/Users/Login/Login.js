@@ -42,10 +42,9 @@ const Login = () => {
     //redirect
     const store = useSelector(state => state?.users)
     //const store = useSelector(state => state?.users)
-    console.log(store);
     const { userAuth, loading, serverErr, appErr } = store;
     console.log(userAuth);
-    if (userAuth) return <Redirect to="/profile" />
+    if (userAuth) return <Redirect to="/" />
 
     return (
         <>
@@ -145,7 +144,9 @@ const Login = () => {
                                         ) : (
                                             <button
                                                 type="submit"
-                                                className="py-4 w-full bg-yellow-500 hover:bg-black hover:text-white text-white font-bold rounded-full transition duration-200"
+                                                className="py-4 w-full bg-yellow-500 
+                                                hover:bg-black hover:text-white text-white font-bold 
+                                                rounded-full transition duration-200"
                                             >
                                                 Login
                                             </button>

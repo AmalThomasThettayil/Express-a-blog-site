@@ -13,7 +13,10 @@ import UpdatePost from "./components/Posts/UpdatePost";
 import Login from "./components/Users/Login/Login";
 import Register from "./components/Users/Register/Register";
 import { GoogleOAuthProvider } from '@react-oauth/google';
-
+import UpdateComment from "./components/Comments/UpdateComment";
+import Profile from "./components/Users/ProfileComponent/Profile";
+import UploadProfilePhoto from "./components/Users/ProfileComponent/UploadProfilePhoto";
+import UpdateProfileForm from "./components/Users/ProfileComponent/UpdateProfileForm";
 
 function App() {
   return (
@@ -23,7 +26,13 @@ function App() {
         <Switch>
           <AdminRoute exact path="/update-category/:id" component={UpdateCategory} />
           <PrivateProtectRoute exact path="/update-post/:id" component={UpdatePost} />
+          <PrivateProtectRoute exact path="/upload-profile-photo"
+            component={UploadProfilePhoto} />
           <PrivateProtectRoute exact path="/create-post" component={CreatePost} />
+          <PrivateProtectRoute exact path="/update-comment/:id" component={UpdateComment} />
+          {/* <PrivateProtectRoute exact path="/profile" component={Profile} /> */}
+          <PrivateProtectRoute exact path="/profile/:id" component={Profile} />
+          <PrivateProtectRoute exact path="/update-profile/:id" component={UpdateProfileForm} />
           <AdminRoute exact path="/add-category" component={AddNewCategory} />
           <Route exact path="/posts" component={PostsList} />
           <AdminRoute exact path="/category-list" component={CategoryList} />

@@ -21,20 +21,18 @@ const PostDetails = ({
 
   //comment
   const comment = useSelector(state => state.comment)
-  const { commentCreated } = comment;
+  const { commentCreated, commentDeleted } = comment;
 
   useEffect(() => {
     dispatch(fetchPostDetailsAction(id))
-  }, [id, dispatch, commentCreated])
+  }, [id, dispatch, commentCreated, commentDeleted])
 
 
   //get login user
   const user = useSelector(state => state?.users)
-  const { userAuth: { _id } } = user
-  console.log(_id);
+  const { userAuth } = user
+  const isCreatedBy = postDetails?.user?._id === userAuth?._id;
 
-  const isCreatedBy = postDetails?.user?._id === _id;
-  console.log(isCreatedBy);
   //redirect
   if (isDeleted) return <Redirect to="/posts" />
   return (
@@ -107,7 +105,8 @@ const PostDetails = ({
               </div>
             </div>
             {/* Add comment Form component here */}
-            <AddComment postId={id} />
+            {userAuth ? (<AddComment postId={id} />) : null}
+
             <div className="flex justify-center  items-center">
               {/* <CommentsList comments={post?.comments} postId={post?._id} /> */}
               <CommentsList comments={postDetails?.comments} />

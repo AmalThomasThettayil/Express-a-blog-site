@@ -36,10 +36,10 @@ export default function PostsList() {
     const dispatch = useDispatch();
     //fetch post
     useEffect(() => {
-        if (userAuth) {
+        // if (userAuth) 
 
-            dispatch(fetchPostsAction(""));
-        }
+        dispatch(fetchPostsAction(""));
+
     }, [dispatch, likes, dislikes]);
 
     //fetch categories
@@ -90,8 +90,7 @@ export default function PostsList() {
                                         ) : (
                                             categoryList?.map(category => (
                                                 <li>
-                                                    <p
-                                                        onClick={() => dispatch(fetchPostsAction(category?.title))}
+                                                    <p onClick={() => dispatch(fetchPostsAction(category?.title))}
                                                         className="block cursor-pointer py-2 px-3 mb-4 rounded text-yellow-500 font-bold bg-gray-900 hover:bg-yellow-900 font-bold leading-loose transition duration-200">
                                                         {category?.title}
                                                     </p>
@@ -118,6 +117,9 @@ export default function PostsList() {
                                                             alt=""
                                                         />
                                                     </Link>
+
+
+
                                                     {/* Likes, views dislikes */}
                                                     <div className="flex flex-row bg-gray-300 justify-center w-full  items-center ">
                                                         {/* Likes */}
@@ -195,6 +197,9 @@ export default function PostsList() {
                                                             </div>
                                                         </div>
                                                     </div>
+
+
+
                                                 </div>
                                                 <div class="w-full lg:w-3/4 px-3">
                                                     <Link class="hover:underline">
@@ -238,10 +243,6 @@ export default function PostsList() {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {/* <p class="text-gray-500">
-                                      Quisque id sagittis turpis. Nulla sollicitudin rutrum
-                                      eros eu dictum...
-                                    </p> */}
                                                 </div>
                                             </div>
                                         ))

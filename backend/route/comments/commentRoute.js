@@ -15,7 +15,6 @@ commentRouter.post("/",
     authMiddleware,
     createCommentCtrl)
 commentRouter.get("/",
-    authMiddleware,
     fetchAllCommentsCtrl)
 commentRouter.get("/:id",
     authMiddleware,

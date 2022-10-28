@@ -185,7 +185,6 @@ const toggleAddLikeToPostCtrl = expressAsyncHandler(async (req, res) => {
             { new: true }
         )
         res.json(post);
-        console.log(post);
     }
     //remove the user if he  has liked the post
     if (isLiked) {

@@ -9,7 +9,6 @@ const resetDeleteAction = createAction("category/delete-reset");
 const resetCategoryAction = createAction("category/created-reset");
 
 //action
-
 export const createCategoryAction = createAsyncThunk(
     "category/create",
     async (category, { rejectWithValue, getState, dispatch }) => {
