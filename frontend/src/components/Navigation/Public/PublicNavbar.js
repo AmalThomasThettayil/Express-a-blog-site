@@ -24,10 +24,12 @@ const PublicNavbar = () => {
     <Disclosure as="nav" className="bg-black">
       {({ open }) => (
         <>
-          <div className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className=" max-w-7xl mx-auto 
+          px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16">
               <div className="flex">
-                <div className="-ml-2 mr-2 flex items-center md:hidden">
+                <div className="-ml-2 mr-2 flex items-center
+                 md:hidden">
                   {/* Mobile menu button */}
                   <Disclosure.Button className="
                   inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white 
