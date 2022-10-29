@@ -7,14 +7,17 @@ const homePage = () => {
     <>
       <section className="videosection bg-black flex justify-center">
         <div className="videodiv relative ">
-          <iframe className="video object-cover"
-            src="https://www.youtube.com/embed/tliJePo6vYs?autoplay=1&mute=1&controls=0&loop=1"
-            title="CAR MUSIC"
-            frameborder="0" allow="accelerometer; encrypted-media; 
-          gyroscope; picture-in-picture" allowfullscreen>
-          </iframe>
+          <iframe
+            className="video object-cover"
+            width="921" height="518"
+            src="https://www.youtube.com/embed/VCW9rQv37J4?autoplay=1&mute=1&controls=0&loop=1"
+            title="VooDoo Blue G82 M4 Comp [4K]"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+
         </div>
-        <div className="relative container px-4 mx-auto">
+        <div className="relative container">
           <div className="flex flex-wrap items-center -mx-4 mb-10 2xl:mb-14">
             <div className="w-full lg: ml-20 mb-16 lg:mb-0">
               {/* <span className="text-lg font-bold text-yellow-400">
