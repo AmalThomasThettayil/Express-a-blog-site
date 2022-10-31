@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPostsAction } from "../../redux/slices/posts/postSlices";
-
+import { Link } from "react-router-dom";
 
 /*
   This example requires some changes to your config:
@@ -53,7 +53,10 @@ export default function ProductCard() {
 
                 <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                     {postLists?.map((post) => (
-                        <div key={post._id} className="group relative">
+                        <Link
+                            to={`/posts/${post?._id}`}
+                            key={post._id}
+                            className="group relative">
                             <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
                                 <img
                                     src={post.image}
@@ -73,7 +76,7 @@ export default function ProductCard() {
                                 </div>
                                 {/* <p className="text-sm font-medium text-gray-900">aa{post.category}</p> */}
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>
