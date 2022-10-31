@@ -18,6 +18,7 @@ import Profile from "./components/Users/ProfileComponent/Profile";
 import UploadProfilePhoto from "./components/Users/ProfileComponent/UploadProfilePhoto";
 import UpdateProfileForm from "./components/Users/ProfileComponent/UpdateProfileForm";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Error from "./components/Error/Error";
 
 function App() {
   return (
@@ -41,6 +42,8 @@ function App() {
           <Route exact path="/posts/:id" component={PostDetails} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="*" component={Error} />
+
 
         </Switch>
       </GoogleOAuthProvider>
