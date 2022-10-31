@@ -1,4 +1,4 @@
-import { PlusCircleIcon, BookOpenIcon } from "@heroicons/react/solid";
+import { PlusCircleIcon } from "@heroicons/react/solid";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { createCategoryAction } from "../../redux/slices/category/categorySlice";
@@ -28,7 +28,7 @@ const AddNewCategory = () => {
 
     //get data from store
     const state = useSelector(state => state?.category)
-    const { loading, appErr, serverErr, category, isCreated } = state;
+    const { loading, appErr, serverErr, isCreated } = state;
     // Redirect
     if (isCreated) return <Redirect to="/category-list" />
 

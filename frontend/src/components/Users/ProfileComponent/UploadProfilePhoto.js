@@ -3,7 +3,7 @@ import Dropzone from "react-dropzone";
 import { useFormik } from "formik";
 import styled from "styled-components";
 import * as Yup from "yup";
-import { uploadProfilePhotoAction, userProfileAction } from "../../../redux/slices/users/userSlices";
+import { uploadProfilePhotoAction } from "../../../redux/slices/users/userSlices";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 

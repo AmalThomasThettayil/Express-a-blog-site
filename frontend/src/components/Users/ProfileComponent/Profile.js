@@ -201,8 +201,8 @@ export default function Profile({
                               <div className="flex mb-2 items-center space-x-4 lg:space-x-6">
                                 <img
                                   className="w-16 h-16 rounded-full lg:w-20 lg:h-20"
-                                // src={user.profilePhoto}
-                                // alt={user?._id}
+                                  // src={user.profilePhoto}
+                                  alt={user?._id}
                                 />
                                 <div className="font-medium text-lg leading-6 space-y-1">
                                   <h3>

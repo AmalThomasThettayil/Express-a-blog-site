@@ -1,6 +1,5 @@
 import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from 'axios'
-import { Redirect } from "react-router-dom"
 import baseUrl from "../../../utils/baseURL"
 
 //redirect action

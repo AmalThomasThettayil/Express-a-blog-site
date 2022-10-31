@@ -2,7 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { createCommentAction } from "../../redux/slices/comments/commentSlices";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 //Form schema
 const formSchema = Yup.object({

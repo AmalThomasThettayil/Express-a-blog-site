@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 //yup for form validation
 import * as Yup from "yup";
 import { registerUserAction } from "../../../redux/slices/users/userSlices";
-import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 
 //Form schema
@@ -23,9 +23,9 @@ const Register = () => {
   //dispath
   const dispatch = useDispatch();
 
-  const login = useGoogleLogin({
-    onSuccess: (credentialResponse) => console.log(credentialResponse),
-  });
+  // const login = useGoogleLogin({
+  //   onSuccess: (credentialResponse) => console.log(credentialResponse),
+  // });
 
   const googleAuth = (userData) => {
     dispatch(registerUserAction(userData));

@@ -29,7 +29,7 @@ const Header = () => {
                 Discover stories, thinking, and expertise from writers on automobiles.
               </p>
               <a className="inline-block px-12 py-5 text-lg text-white font-bold bg-black hover:bg-yellow-500 hover:text-black rounded-full transition duration-200"
-                href="/">
+                href="/posts">
                 Start reading
               </a>
             </div>
