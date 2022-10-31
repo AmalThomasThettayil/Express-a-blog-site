@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import AdminNavbar from './Admin/AdminNavbar'
-import PrivateNavbar from './Private/PrivateNavbar'
-import PublicNavbar from './Public/PublicNavbar'
+import AdNav2 from './Admin/AdNav2'
+import PriNav2 from './Private/PriNav2'
+import P2 from './Public/P2'
 
 function Navbar() {
     const state = useSelector(state => state.users)
@@ -11,11 +11,12 @@ function Navbar() {
     return (
         <>
             {isAdmin ? (
-                <AdminNavbar isLogin={userAuth} />)
+                <AdNav2 isLogin={userAuth} />
+            )
                 : userAuth ? (
-                    <PrivateNavbar isLogin={userAuth} />)
-                    : (
-                        <PublicNavbar />)}
+                    <PriNav2 isLogin={userAuth} />
+                ) : (
+                    <P2 />)}
         </>
     )
 }

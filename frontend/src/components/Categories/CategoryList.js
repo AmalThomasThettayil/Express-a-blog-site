@@ -15,7 +15,7 @@ const CategoryList = () => {
   const category = useSelector(state => state?.category);
 
   const { categoryList, loading, appErr, serverErr } = category;
-  console.log(categoryList, loading, appErr, serverErr);
+
   return (
     <>
       {loading ? (

@@ -21,7 +21,8 @@ function classNames(...classes) {
 
 const PublicNavbar = () => {
   return (
-    <Disclosure as="nav" className="bg-black">
+
+    <Disclosure as="nav" className="bg-black ">
       {({ open }) => (
         <>
           <div className=" max-w-7xl mx-auto 
@@ -141,6 +142,10 @@ const PublicNavbar = () => {
       )}
 
     </Disclosure>
+
+
+
+
   );
 };
 

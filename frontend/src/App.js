@@ -2,7 +2,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom"
 import AddNewCategory from "./components/Categories/AddNewCategory";
 import CategoryList from "./components/Categories/CategoryList";
 import UpdateCategory from "./components/Categories/UpdateCategory";
-import HomePage from "./components/HomePage/HomePage";
+import HomePage from "./components/HomePage/HomePage"
 import Navbar from "./components/Navigation/Navbar";
 import AdminRoute from "./components/Navigation/ProtectedRoute/AdminProtectedRoute";
 import PrivateProtectRoute from "./components/Navigation/ProtectedRoute/PrivateProtectedRoute";
@@ -17,6 +17,7 @@ import UpdateComment from "./components/Comments/UpdateComment";
 import Profile from "./components/Users/ProfileComponent/Profile";
 import UploadProfilePhoto from "./components/Users/ProfileComponent/UploadProfilePhoto";
 import UpdateProfileForm from "./components/Users/ProfileComponent/UpdateProfileForm";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
