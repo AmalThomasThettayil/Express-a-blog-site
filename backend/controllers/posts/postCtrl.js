@@ -28,7 +28,7 @@ const createPostCtrl = expressAsyncHandler(async (req, res) => {
         );
     }
 
-    //Prevet user f his account is a starter account
+
 
     if (
         req?.user?.accountType === "Starter Account" &&
@@ -49,20 +49,20 @@ const createPostCtrl = expressAsyncHandler(async (req, res) => {
             user: _id,
             image: imgUploaded?.url,
         });
-        console.log(req.user);
-        //update the user post count
-        // await User.findByIdAndUpdate(
-        //     _id,
-        //     {
-        //         $inc: { postCount: 1 },
-        //     },
-        //     {
-        //         new: true,
-        //     }
-        // );
 
-        //Remove uploaded img
-        // fs.unlinkSync(localPath);
+        // update the user post count
+        await User.findByIdAndUpdate(
+            _id,
+            {
+                $inc: { postCount: 1 },
+            },
+            {
+                new: true,
+            }
+        );
+
+        // Remove uploaded img
+        fs.unlinkSync(localPath);
         res.json(post);
     } catch (error) {
         res.json(error);
@@ -82,10 +82,10 @@ const fetchPostsCtrl = expressAsyncHandler(async (req, res) => {
                 .populate("comments");
             res.json(posts)
         } else {
-
             const posts = await Post.find({})
                 .populate("user")
-                .populate("comments");
+                .populate("comments")
+                .sort({ createdAt: -1 });
             res.json(posts)
         }
     } catch (error) {
@@ -122,7 +122,6 @@ const fetchPostCtrl = expressAsyncHandler(async (req, res) => {
 //Update post
 //--------------------------------------
 const updatePostCtrl = expressAsyncHandler(async (req, res) => {
-    console.log(req.user);
     const { id } = req.params;
     validateMongodbId(id);
     try {

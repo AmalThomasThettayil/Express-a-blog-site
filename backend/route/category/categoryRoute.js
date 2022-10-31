@@ -14,7 +14,6 @@ categoryRoute.post("/",
     createCategoryCtrl,
 );
 categoryRoute.get("/",
-    authMiddleware,
     fetchAllCategory
 );
 categoryRoute.get("/:id",

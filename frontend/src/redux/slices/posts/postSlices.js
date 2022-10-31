@@ -151,6 +151,7 @@ export const toggleAddLikesToPost = createAsyncThunk(
                 Authorization: `Bearer ${userAuth?.token}`,
             },
         };
+
         try {
             const { data } = await axios.put(
                 `${baseUrl}/api/posts/likes`,

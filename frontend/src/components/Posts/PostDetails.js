@@ -45,18 +45,26 @@ const PostDetails = ({
         :
         appErr || serverErr ?
           (<h1 className="h-screen text-red-400 text-xl">{serverErr} {appErr}</h1>) :
-          (<section className="py-20 2xl:py-40 bg-white-800 overflow-hidden">
-            <div className="container px-4 mx-auto">
+          (<section
+            className="py-20 2xl:py-40 bg-white overflow-hidden"
+          >
+            <div
+              className=" px-4 mx-auto"
+            >
               {/* Post Image */}
-              <div className="flex justify-center">
+              <div
+                className="flex justify-center"
+              >
                 <img
-                  className="mb-24 w-auto h-25 object-cover"
+                  className="mb-10 w-auto h-25 object-fit"
                   src={postDetails?.image}
-                  alt=""
+                  alt="img"
                 />
               </div>
-              <div className="max-w-2xl mx-auto text-center">
-                <h2 className="mt-7 mb-14 text-6xl 2xl:text-7xl text-black font-bold font-heading">
+              <div
+                className=" mx-auto text-center"
+              >
+                <h2 className="mb-14 text-6xl 2xl:text-7xl text-black font-bold font-heading">
                   {postDetails?.title}
                 </h2>
 
@@ -80,8 +88,8 @@ const PostDetails = ({
                   </div>
                 </div>
                 {/* Post description */}
-                <div className="max-w-xl mx-auto">
-                  <p className="mb-6 text-left  text-xl text-black-200">
+                <div className="max-w-6xl mx-auto">
+                  <p className="mb-6 text-justify  text-xl text-black-200">
                     <div className="text-black-300" dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(
                         postDetails?.description),

@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 const navigation = [
     { name: "Create", href: "/create-post", current: false },
     { name: "Posts", href: "/posts", current: false },
-    { name: "Authors", href: "/users", current: false },
     { name: "Add Category", href: "/add-category", current: false },
     { name: "Category List", href: "/category-list", current: false },
 ];

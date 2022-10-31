@@ -19,19 +19,21 @@ export default function PostsList() {
     //select post from store
     const post = useSelector(state => state?.post)
     const { postLists, appErr, serverErr, likes, dislikes } = post;
-    console.log(postLists);
+    console.log(post);
+
     const user = useSelector((state) => state?.users);
     const { userAuth } = user;
     //const navigate = useNavigate();
     //select category from store
     const category = useSelector(state => state?.category)
-
+    console.log(category);
     const {
         categoryList,
         loading: catLoading,
         appErr: catAppErr,
         serverErr: catServerErr,
     } = category;
+
 
     //dispatch
     const dispatch = useDispatch();
@@ -113,19 +115,19 @@ export default function PostsList() {
                                                     <Link>
                                                         {/* Post image */}
                                                         <img
+                                                            to={`/posts/${post?._id}`}
                                                             class="w-full h-full object-cover rounded"
                                                             src={post?.image}
                                                             alt=""
                                                         />
                                                     </Link>
 
-
-
                                                     {/* Likes, views dislikes */}
                                                     <div className="flex flex-row bg-gray-300 justify-center w-full  items-center ">
                                                         {/* Likes */}
                                                         <div className="flex flex-row justify-center items-center ml-4 mr-4 pb-2 pt-1">
                                                             {/* Togle like  */}
+
                                                             {post?.likes?.includes(userAuth?._id) ? (
                                                                 <div className="">
                                                                     <ThumbUpIcon
@@ -178,17 +180,6 @@ export default function PostsList() {
                                                                     : 0}
                                                             </div>
                                                         </div>
-
-                                                        {/* Dislike */}
-                                                        {/* <div className="flex flex-row  justify-center items-center ml-4 mr-4 pb-2 pt-1">
-                                                            <div>
-                                                                <ThumbDownIcon onClick={() =>
-                                                                    dispatch(toggleAddDislikesToPost(post?._id))}
-                                                                    className="h-7 w-7 cursor-pointer text-gray-600" />
-                                                            </div>
-                                                            <div className="pl-2 text-gray-600"> {post?.disLikes?.length ? post?.disLikes?.length : 0}</div>
-                                                        </div> */}
-                                                        {/* Views */}
                                                         <div className="flex flex-row justify-center items-center ml-4 mr-4 pb-2 pt-1">
                                                             <div>
                                                                 <EyeIcon className="h-7 w-7  text-gray-400" />
@@ -198,21 +189,23 @@ export default function PostsList() {
                                                             </div>
                                                         </div>
                                                     </div>
-
-
-
                                                 </div>
                                                 <div class="w-full lg:w-3/4 px-3">
-                                                    <Link class="hover:underline">
+                                                    <Link
+                                                        to={`/posts/${post?._id}`}
+                                                        class="hover:underline">
                                                         <h3 class="mb-1 text-2xl text-green-400 font-bold font-heading">
                                                             {/* {capitalizeWord(post?.title)} */}  {post?.title}
                                                         </h3>
                                                     </Link>
-                                                    <div class="text-gray-300" dangerouslySetInnerHTML={{
-                                                        __html: DOMPurify.sanitize(
-                                                            post.description.substr(0, 1000)
-                                                        ),
-                                                    }}></div>
+
+                                                    <a
+                                                        href={`/posts/${post?._id}`}
+                                                        class="text-gray-300 hover:text-white" dangerouslySetInnerHTML={{
+                                                            __html: DOMPurify.sanitize(
+                                                                post.description.substr(0, 1000)
+                                                            ),
+                                                        }}></a>
                                                     {/* Read more */}
                                                     <Link
                                                         to={`/posts/${post?._id}`}
@@ -232,7 +225,7 @@ export default function PostsList() {
                                                         </div>
                                                         <div className="ml-3">
                                                             <p className="text-sm font-medium text-gray-900">
-                                                                <Link className="text-yellow-400 hover:underline ">
+                                                                <Link className="text-yellow-400">
                                                                     {post?.user?.firstName} {post?.user?.lastName}
                                                                 </Link>
                                                             </p>
@@ -246,7 +239,8 @@ export default function PostsList() {
                                                     </div>
                                                 </div>
                                             </div>
-                                        ))
+                                        )
+                                        )
                                         )}
                             </div>
                         </div>
