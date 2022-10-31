@@ -38,7 +38,7 @@ function PriNav2({ isLogin }) {
                 <Navbar.Brand href="/">Express</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto  ">
+                    <Nav className="container-fluid ">
                         {navigation.map(item => (
                             <>
                                 <Nav.Link
@@ -49,7 +49,10 @@ function PriNav2({ isLogin }) {
 
                             </>
                         ))}
-                        <NavDropdown title={isLogin.firstName} id="basic-nav-dropdown" >
+                        <NavDropdown
+                            className="ml-auto"
+                            title={isLogin.firstName}
+                            id="basic-nav-dropdown" >
                             {userNavigation.map(item => (
                                 <NavDropdown.Item href={item.href}>{item.name}</NavDropdown.Item>
                             ))}

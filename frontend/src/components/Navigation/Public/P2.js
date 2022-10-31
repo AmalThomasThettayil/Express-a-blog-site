@@ -24,14 +24,17 @@ function P2() {
                 <Navbar.Brand href="/">Express</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto  ">
+                    <Nav className="container-fluid  ">
                         {navigation.map(item => (
                             <Nav.Link
                                 key={item.name}
                                 href={item.href}>{item.name}
                             </Nav.Link>
                         ))}
-                        <NavDropdown title="Accounts" id="basic-nav-dropdown" >
+                        <NavDropdown
+                            className="ml-auto"
+                            title="Accounts"
+                            id="basic-nav-dropdown" >
                             <NavDropdown.Item href="/login">Login</NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item href="/register">
