@@ -1,13 +1,15 @@
 import React from "react";
 //formik for forms
 import { useFormik } from "formik";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 //yup for form validation
 import * as Yup from "yup";
 import { registerUserAction } from "../../../redux/slices/users/userSlices";
 import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
+
+
 
 //Form schema
 const formSchema = Yup.object({
@@ -20,6 +22,7 @@ const formSchema = Yup.object({
 //Register
 //-------------------------------
 const Register = () => {
+
   //dispath
   const dispatch = useDispatch();
 
@@ -55,7 +58,7 @@ const Register = () => {
 
   //redirect
   if (registered) {
-    return <Redirect to="/profile" />;
+    return Navigate("/profile");
   }
 
   return (

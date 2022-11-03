@@ -1,13 +1,13 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Dropzone from "react-dropzone";
-import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { createpostAction } from "../../redux/slices/posts/postSlices";
 import CategoryDropDown from "../Categories/CategoryDropDown";
 import React, { useRef, } from 'react';
 import JoditEditor from 'jodit-react';
+import { Navigate } from "react-router-dom";
 
 //Form schema
 const formSchema = Yup.object({
@@ -62,7 +62,7 @@ export default function CreatePost() {
     });
 
     //redirect
-    if (isCreated) return <Redirect to="/posts" />;
+    if (isCreated) return Navigate("/posts")
     return (
         <>
             <div className=" min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">

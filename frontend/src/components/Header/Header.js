@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import "./Header.css"
 
 const Header = () => {
@@ -28,10 +29,10 @@ const Header = () => {
               <p className="mb-12 lg:mb-16 2xl:mb-24 text-xl text-white font-bold">
                 Discover stories, thinking, and expertise from writers on automobiles.
               </p>
-              <a className="inline-block px-12 py-5 text-lg text-white font-bold bg-black hover:bg-yellow-500 hover:text-black rounded-full transition duration-200"
-                href="/posts">
+              <Link className="inline-block px-3 py-3 text-lg text-white font-bold bg-black rounded-full hover:bg-yellow-500 hover:text-black "
+                to="/posts">
                 Start reading
-              </a>
+              </Link>
             </div>
             {/* <div className="w-full lg:w-1/2 px-4">
               <img className="w-full" src={poster} alt={poster} />

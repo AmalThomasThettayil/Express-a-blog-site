@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
@@ -46,7 +46,7 @@ const UpdateComment = ({ computedMatch: {
     validationSchema: formSchema,
   });
   //redirect
-  if (isUpdated) return <Redirect to={`/posts/`} />
+  if (isUpdated) return Navigate(`/posts/`)
   return (
     <div className="height-96 flex justify-center items-center">
 

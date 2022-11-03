@@ -55,11 +55,11 @@ export default function ProductCard() {
                             </div>
                             <div className="mt-4 flex justify-between">
                                 <div>
-                                    <h3 className="text-sm text-gray-700">
-                                        <a href={post.href}>
-                                            <span aria-hidden="true" className="absolute inset-0" />
+                                    <h3 className="text-sm text-gray-700 font-bold">
+                                        <h1 >
+                                            <span aria-hidden="true" className="absolute inset-0 " />
                                             {post.title}
-                                        </a>
+                                        </h1>
                                     </h3>
                                     <p className="mt-1 text-sm text-gray-500">{post.category}</p>
                                 </div>

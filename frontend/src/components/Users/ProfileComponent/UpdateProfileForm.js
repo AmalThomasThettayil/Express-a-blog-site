@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { fetchUserDetailsAction, updateUserAction } from "../../../redux/slices/users/userSlices";
@@ -50,7 +50,7 @@ const UpdateProfileForm = ({
   });
 
   //redirect
-  if (isUpdated) <Redirect to={`/profile/${id}`} />
+  if (isUpdated) Navigate(`/profile/${id}`)
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">

@@ -12,11 +12,10 @@ function Navbar() {
         <>
             {isAdmin ? (
                 <AdNav2 isLogin={userAuth} />
-            )
-                : userAuth ? (
-                    <PriNav2 isLogin={userAuth} />
-                ) : (
-                    <P2 />)}
+            ) : userAuth ? (
+                <PriNav2 isLogin={userAuth} />
+            ) : (
+                <P2 />)}
         </>
     )
 }

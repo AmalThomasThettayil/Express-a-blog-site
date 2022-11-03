@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { PencilAltIcon, TrashIcon } from "@heroicons/react/solid";
 import { deletepostAction, fetchPostDetailsAction } from "../../redux/slices/posts/postSlices";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,16 +9,16 @@ import Loadingcomponent from "../../utils/LoadingComponent";
 import AddComment from "../Comments/AddComment";
 import CommentsList from "../Comments/CommentsList";
 
-const PostDetails = ({
-  match: {
-    params: { id },
-  },
-}) => {
+const PostDetails = (props) => {
+
+  const { id } = useParams();
+  console.log(id);
+
   const dispatch = useDispatch()
   //select post details from store
   const post = useSelector(state => state?.post)
   const { postDetails, loading, appErr, serverErr, isDeleted } = post;
-
+  console.log(postDetails);
   //comment
   const comment = useSelector(state => state.comment)
   const { commentCreated, commentDeleted } = comment;
@@ -34,7 +34,7 @@ const PostDetails = ({
   const isCreatedBy = postDetails?.user?._id === userAuth?._id;
 
   //redirect
-  if (isDeleted) return <Redirect to="/posts" />
+  if (isDeleted) return Navigate("/posts")
   return (
     <>
 

@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { useFormik } from "formik";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import CategoryDropDown from "../Categories/CategoryDropDown";
@@ -57,7 +57,7 @@ export default function UpdatePost(props) {
     });
 
     //redirect
-    if (isUpdated) return <Redirect to="/posts" />
+    if (isUpdated) return Navigate("/posts")
 
     return (
         <>

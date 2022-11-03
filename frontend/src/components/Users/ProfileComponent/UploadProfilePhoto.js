@@ -5,7 +5,7 @@ import styled from "styled-components";
 import * as Yup from "yup";
 import { uploadProfilePhotoAction } from "../../../redux/slices/users/userSlices";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //Css for dropzone
 const Container = styled.div`
@@ -28,6 +28,9 @@ const formSchema = Yup.object({
 });
 
 export default function UploadProfilePhoto() {
+
+  //navigate
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   //formik
   const formik = useFormik({
@@ -45,7 +48,7 @@ export default function UploadProfilePhoto() {
   const { profilePhoto, loading, appErr, serverErr, userAuth } = users
   console.log(profilePhoto);
   //redirect
-  if (profilePhoto) return <Redirect to={`/profile/${userAuth?._id}`} />
+  if (profilePhoto) return navigate(`/profile/${userAuth?._id}`)
 
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">

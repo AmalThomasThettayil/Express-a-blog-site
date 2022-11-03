@@ -1,51 +1,95 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom"
-import AddNewCategory from "./components/Categories/AddNewCategory";
-import CategoryList from "./components/Categories/CategoryList";
-import UpdateCategory from "./components/Categories/UpdateCategory";
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import HomePage from "./components/HomePage/HomePage"
 import Navbar from "./components/Navigation/Navbar";
-import AdminRoute from "./components/Navigation/ProtectedRoute/AdminProtectedRoute";
-import PrivateProtectRoute from "./components/Navigation/ProtectedRoute/PrivateProtectedRoute";
-import CreatePost from "./components/Posts/CreatePost";
 import PostDetails from "./components/Posts/PostDetails";
 import PostsList from "./components/Posts/PostList";
-import UpdatePost from "./components/Posts/UpdatePost";
 import Login from "./components/Users/Login/Login";
 import Register from "./components/Users/Register/Register";
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import UpdateComment from "./components/Comments/UpdateComment";
-import Profile from "./components/Users/ProfileComponent/Profile";
-import UploadProfilePhoto from "./components/Users/ProfileComponent/UploadProfilePhoto";
-import UpdateProfileForm from "./components/Users/ProfileComponent/UpdateProfileForm";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Error from "./components/Error/Error";
+
+//admin
+import AddNewCategory from "./components/Categories/AddNewCategory";
+import CategoryList from "./components/Categories/CategoryList";
+import UpdateCategory from "./components/Categories/UpdateCategory";
+import ProtectedRoute from "./components/Navigation/ProtectedRoute/ProtectedRoute";
+
+//logged in user
+import UpdateComment from "./components/Comments/UpdateComment";
+import CreatePost from "./components/Posts/CreatePost";
+import UpdatePost from "./components/Posts/UpdatePost";
+import Profile from "./components/Users/ProfileComponent/Profile";
+import UpdateProfileForm from "./components/Users/ProfileComponent/UpdateProfileForm";
+import UploadProfilePhoto from "./components/Users/ProfileComponent/UploadProfilePhoto";
+
 
 function App() {
   return (
     <BrowserRouter>
       <GoogleOAuthProvider clientId="931713857882-ic4fva3cjipjc6lhd3jpv3koqoj28gjj.apps.googleusercontent.com">
         <Navbar />
-        <Switch>
-          <AdminRoute exact path="/update-category/:id" component={UpdateCategory} />
-          <PrivateProtectRoute exact path="/update-post/:id" component={UpdatePost} />
-          <PrivateProtectRoute exact path="/upload-profile-photo"
-            component={UploadProfilePhoto} />
-          <PrivateProtectRoute exact path="/create-post" component={CreatePost} />
-          <PrivateProtectRoute exact path="/update-comment/:id" component={UpdateComment} />
-          {/* <PrivateProtectRoute exact path="/profile" component={Profile} /> */}
-          <PrivateProtectRoute exact path="/profile/:id" component={Profile} />
-          <PrivateProtectRoute exact path="/update-profile/:id" component={UpdateProfileForm} />
-          <AdminRoute exact path="/add-category" component={AddNewCategory} />
-          <Route exact path="/posts" component={PostsList} />
-          <AdminRoute exact path="/category-list" component={CategoryList} />
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/posts/:id" component={PostDetails} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="*" component={Error} />
+        {/* <AdminRoute1 /> */}
+        {/* <Privateroute /> */}
+        <Routes>
+          {/* admin */}
+          <Route exact path="/category-list" element={
+            <ProtectedRoute>
+              <CategoryList />
+            </ProtectedRoute>
+          }
+          />
+          <Route exact path="/add-category" element={
+            <ProtectedRoute>
+              <AddNewCategory />
+            </ProtectedRoute>
+          }
+          />
+          <Route exact path="/update-category/:id" element={
+            <ProtectedRoute>
+              <UpdateCategory />
+            </ProtectedRoute>}
+          />
 
+          {/* logged in user */}
+          <Route path="/update-post/:id" element={
+            <ProtectedRoute>
+              <UpdatePost />
+            </ProtectedRoute>
+          } />
+          <Route path="/upload-profile-photo" element={
+            <ProtectedRoute>
+              <UploadProfilePhoto />
+            </ProtectedRoute>
+          } />
+          <Route path="/create-post" element={
+            <ProtectedRoute>
+              <CreatePost />
+            </ProtectedRoute>
+          } />
+          <Route path="/update-comment/:id" element={
+            <ProtectedRoute>
+              <UpdateComment />
+            </ProtectedRoute>
+          } />
+          <Route path="/profile/:id" element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          } />
+          <Route path="/update-profile/:id" element={
+            <ProtectedRoute>
+              <UpdateProfileForm />
+            </ProtectedRoute>
+          } />
 
-        </Switch>
+          <Route exact path="/posts" element={<PostsList />} />
+          <Route exact path="/" element={<HomePage />} />
+          <Route exact path="/posts/:id" element={<PostDetails />} />
+          <Route exact path="/register" element={<Register />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="*" element={<Error />} />
+        </Routes>
       </GoogleOAuthProvider>
     </BrowserRouter>
   );
