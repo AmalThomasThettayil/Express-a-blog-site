@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
@@ -14,11 +14,12 @@ const formSchema = Yup.object({
   description: Yup.string().required("Description is required"),
 });
 
-const UpdateComment = ({ computedMatch: {
-  params: { id },
-} }) => {
+const UpdateComment = (props) => {
+  const { id } = useParams();
+  console.log(id);
   //dispatch
   const dispatch = useDispatch();
+  const Navigate = useNavigate();
 
   //fetch comment
   useEffect(() => {
@@ -46,7 +47,7 @@ const UpdateComment = ({ computedMatch: {
     validationSchema: formSchema,
   });
   //redirect
-  if (isUpdated) return Navigate(`/posts/`)
+  if (isUpdated) return Navigate(`/posts`)
   return (
     <div className="height-96 flex justify-center items-center">
 

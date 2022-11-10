@@ -19,7 +19,6 @@ export default function PostsList() {
     //select post from store
     const post = useSelector(state => state?.post)
     const { postLists, appErr, serverErr, likes, dislikes } = post;
-    console.log(post);
 
     const user = useSelector((state) => state?.users);
     const { userAuth } = user;

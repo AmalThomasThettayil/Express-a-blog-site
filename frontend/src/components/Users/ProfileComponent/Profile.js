@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   HeartIcon,
   EmojiSadIcon,
@@ -13,12 +13,9 @@ import DateFormatter from "../../../utils/DateFormatter";
 import DOMPurify from "dompurify";
 import Loadingcomponent from "../../../utils/LoadingComponent";
 
-export default function Profile({
-  computedMatch: {
-    params: { id },
-  },
-}) {
+export default function Profile(props) {
   const dispatch = useDispatch()
+  const { id } = useParams();
   //fetch  user profile
   useEffect(() => {
     dispatch(userProfileAction(id))

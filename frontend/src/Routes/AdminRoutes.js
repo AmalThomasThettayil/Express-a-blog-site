@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import AddNewCategory from "../components/Categories/AddNewCategory";
 import CategoryList from "../components/Categories/CategoryList";
 import UpdateCategory from "../components/Categories/UpdateCategory";
-import Error from "../components/Error/Error";
 import ProtectedRoute from "../components/Navigation/ProtectedRoute/ProtectedRoute";
 
 

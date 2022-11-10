@@ -110,7 +110,6 @@ export const updateCommentAction = createAsyncThunk(
 );
 
 //fetch commend details
-
 export const fetchCommentAction = createAsyncThunk(
     "comment/fetch-details",
     async (id, { rejectWithValue, getState, dispatch }) => {

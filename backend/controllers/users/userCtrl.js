@@ -53,7 +53,6 @@ const loginUserCtrl = expressAsyncHandler(async (req, res) => {
 
 //FETCHING all users
 const fetchUsersCtrl = expressAsyncHandler(async (req, res) => {
-  console.log(req.headers)
   try {
     const users = await User.find({});
     res.json(users);
@@ -65,6 +64,7 @@ const fetchUsersCtrl = expressAsyncHandler(async (req, res) => {
 //DELETE USER
 const deleteUserCtrl = expressAsyncHandler(async (req, res) => {
   const { id } = req.params;
+  console.log(id);
   //checkif user id is valid
   validateMongodbId(id);
   try {

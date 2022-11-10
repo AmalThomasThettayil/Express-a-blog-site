@@ -7,7 +7,7 @@ import { createpostAction } from "../../redux/slices/posts/postSlices";
 import CategoryDropDown from "../Categories/CategoryDropDown";
 import React, { useRef, } from 'react';
 import JoditEditor from 'jodit-react';
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //Form schema
 const formSchema = Yup.object({
@@ -35,6 +35,7 @@ border-color:'red'
 export default function CreatePost() {
     const editor = useRef(null);
     const dispatch = useDispatch();
+    const Navigate = useNavigate();
 
     //select store data
     const post = useSelector(state => state?.post);

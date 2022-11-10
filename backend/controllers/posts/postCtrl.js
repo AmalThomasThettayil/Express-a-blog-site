@@ -4,6 +4,7 @@ const validateMongodbId = require("../../utils/validateMongodbID");
 const Filter = require("bad-words");
 const User = require("../../model/user/User");
 const cloudinaryUploadImg = require("../../utils/cloudinary");
+// const objectId = require('mongodb').ObjectId
 
 
 
@@ -147,9 +148,8 @@ const updatePostCtrl = expressAsyncHandler(async (req, res) => {
 //--------------------------------------
 const deletePostCtrl = expressAsyncHandler(async (req, res) => {
     const { id } = req.params;
-    validateMongodbId(id)
     try {
-        const post = await Post.findOneAndDelete(id)
+        const post = await Post.findByIdAndDelete(id)
         res.json(post);
     } catch (error) {
         res.json(error)

@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { createCategoryAction } from "../../redux/slices/category/categorySlice";
 import * as Yup from "yup";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //Form schema
 const formSchema = Yup.object({
@@ -12,6 +12,7 @@ const formSchema = Yup.object({
 
 const AddNewCategory = () => {
     const dispatch = useDispatch();
+    const Navigate = useNavigate();
     //formik
     const formik = useFormik({
         initialValues: {

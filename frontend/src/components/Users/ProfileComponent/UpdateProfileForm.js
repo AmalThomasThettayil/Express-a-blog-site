@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
-import { Navigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { fetchUserDetailsAction, updateUserAction } from "../../../redux/slices/users/userSlices";
@@ -13,12 +13,11 @@ const formSchema = Yup.object({
   bio: Yup.string().required("Bio is required"),
 });
 
-const UpdateProfileForm = ({
-  computedMatch: {
-    params: { id },
-  },
-}) => {
+const UpdateProfileForm = (props) => {
   const dispatch = useDispatch();
+  const { id } = useParams();
+
+  const Navigate = useNavigate();
 
   //fetch user details
   useEffect(() => {
@@ -43,8 +42,11 @@ const UpdateProfileForm = ({
       email: userDetails?.email,
     },
     onSubmit: values => {
+
       //dispath the action
       dispatch(updateUserAction(values));
+      console.log("1111111111");
+      console.log(values);
     },
     validationSchema: formSchema,
   });

@@ -31,6 +31,7 @@
     "react-select": "^5.4.0",
     "react-spinners": "^0.13.6",
     "styled-components": "^5.3.6",
+    "vercel": "^28.4.17",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },

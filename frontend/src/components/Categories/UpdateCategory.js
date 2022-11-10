@@ -4,15 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteCategoriesAction, fetchCategoryAction, updateCategoriesAction } from "../../redux/slices/category/categorySlice";
 import * as Yup from "yup";
 import { useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 //Form schema
 const formSchema = Yup.object({
     title: Yup.string().required("Title is required"),
 });
 
-const UpdateCategory = ({ computedMatch: { params: { id } } }) => {
+const UpdateCategory = (props) => {
     const dispatch = useDispatch();
+    const Navigate = useNavigate();
+    const { id } = useParams();
     //fetch single category
     useEffect(() => {
         dispatch(fetchCategoryAction(id))

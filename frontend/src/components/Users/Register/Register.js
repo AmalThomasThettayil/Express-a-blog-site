@@ -1,7 +1,7 @@
 import React from "react";
 //formik for forms
 import { useFormik } from "formik";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 //yup for form validation
 import * as Yup from "yup";
@@ -25,6 +25,7 @@ const Register = () => {
 
   //dispath
   const dispatch = useDispatch();
+  const Navigate = useNavigate();
 
   // const login = useGoogleLogin({
   //   onSuccess: (credentialResponse) => console.log(credentialResponse),
@@ -58,7 +59,7 @@ const Register = () => {
 
   //redirect
   if (registered) {
-    return Navigate("/profile");
+    return Navigate("/");
   }
 
   return (

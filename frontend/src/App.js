@@ -29,8 +29,6 @@ function App() {
     <BrowserRouter>
       <GoogleOAuthProvider clientId="931713857882-ic4fva3cjipjc6lhd3jpv3koqoj28gjj.apps.googleusercontent.com">
         <Navbar />
-        {/* <AdminRoute1 /> */}
-        {/* <Privateroute /> */}
         <Routes>
           {/* admin */}
           <Route exact path="/category-list" element={

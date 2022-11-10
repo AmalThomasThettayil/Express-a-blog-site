@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { PencilAltIcon, TrashIcon } from "@heroicons/react/solid";
 import { deletepostAction, fetchPostDetailsAction } from "../../redux/slices/posts/postSlices";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,7 @@ const PostDetails = (props) => {
   console.log(id);
 
   const dispatch = useDispatch()
+  const Navigate = useNavigate();
   //select post details from store
   const post = useSelector(state => state?.post)
   const { postDetails, loading, appErr, serverErr, isDeleted } = post;

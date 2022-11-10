@@ -13,11 +13,11 @@ export default function CommentsList({ comments }) {
   const dispatch = useDispatch();
   return (
     <div>
-      <ul className="divide-y bg-gray-700 w-96 divide-gray-200 p-3 mt-5">
-        <div className="text-gray-400">Comments{" ("}{comments?.length}{")"}</div>
+      <ul className="divide-y bg-gray-300 w-96 divide-gray-200 p-3 mt-5">
+        <div className="text-black">Comments{" ("}{comments?.length}{")"}</div>
         <>
           {comments?.length <= 0 ? (
-            <h1 className="text-yellow-400 text-lg text-center">No comments</h1>
+            <h1 className="text-yellow-600 text-lg text-center">No comments</h1>
           ) : (
             comments?.map(comment => (
               <>
@@ -32,10 +32,10 @@ export default function CommentsList({ comments }) {
                     />
                     <div className="flex-1 space-y-1">
                       <div className="flex items-center justify-between">
-                        <h3 className="text-sm font-medium text-green-400">
+                        <h3 className="text-sm font-medium text-black">
                           {comment?.user?.firstName} {comment?.user?.lastName}
                         </h3>
-                        <p className="text-bold text-yellow-500 text-base ml-5">
+                        <p className="text-bold text-black text-base ml-5">
                           {/* <Moment fromNow ago>
                       {comment?.createdAt}
                     </Moment> */}
@@ -45,7 +45,7 @@ export default function CommentsList({ comments }) {
                           </Moment>
                         </p>
                       </div>
-                      <p className="text-sm text-gray-400">
+                      <p className="text-sm text-black">
                         {comment?.description}
                       </p>
                       {/* Check if is the same user created this comment */}
@@ -55,7 +55,7 @@ export default function CommentsList({ comments }) {
                             <Link
                               to={`/update-comment/${comment?._id}`}
                               class="p-3">
-                              <PencilAltIcon class="h-5 mt-3 text-yellow-300" />
+                              <PencilAltIcon class="h-5 mt-3 text-yellow-600" />
                             </Link>
                             <button
                               onClick={() => dispatch(deleteCommentAction(comment?._id))}

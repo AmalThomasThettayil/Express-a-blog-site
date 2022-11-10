@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPostsAction } from "../../redux/slices/posts/postSlices";
 import { Link } from "react-router-dom";
+import { fetchUsersAction } from "../../redux/slices/users/userSlices";
+
 
 /*
   This example requires some changes to your config:
@@ -28,6 +30,7 @@ export default function ProductCard() {
     //fetch post
     useEffect(() => {
         // if (userAuth)
+        dispatch(fetchUsersAction(""))
         dispatch(fetchPostsAction(""));
     }, [dispatch, likes, dislikes]);
     console.log(postLists);

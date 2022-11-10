@@ -246,7 +246,7 @@ const postSlice = createSlice({
             state.isDeleted = true;
         })
         builder.addCase(deletepostAction.fulfilled, (state, action) => {
-            state.postUpdated = action?.payload;
+            state.postDeleted = action?.payload;
             state.loading = false;
             state.appErr = undefined;
             state.serverErr = undefined;

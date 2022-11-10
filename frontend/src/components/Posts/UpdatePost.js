@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { useFormik } from "formik";
-import { Navigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import CategoryDropDown from "../Categories/CategoryDropDown";
@@ -15,12 +15,10 @@ const formSchema = Yup.object({
 });
 
 export default function UpdatePost(props) {
+
+    const { id } = useParams()
+    const Navigate = useNavigate();
     const editor = useRef(null);
-    const {
-        computedMatch: {
-            params: { id }
-        }
-    } = props;
 
     //fetch the post in the url
     const dispatch = useDispatch()
@@ -62,7 +60,9 @@ export default function UpdatePost(props) {
     return (
         <>
             <div className="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-                <div className="sm:mx-auto sm:w-full sm:max-w-md">
+                <div
+                //  className="sm:mx-auto sm:w-full sm:max-w-md"
+                >
                     <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-300">
                         Are you sure you want to edit: {" "}
                         <span className="text-green-300">{postDetails?.title}</span>
@@ -75,7 +75,9 @@ export default function UpdatePost(props) {
                         null}
                 </div>
 
-                <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                <div
+                // className="mt-8 sm:mx-auto sm:w-full sm:max-w-md"
+                >
                     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
                         <form
                             onSubmit={formik.handleSubmit}
